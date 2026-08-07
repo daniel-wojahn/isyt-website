@@ -153,6 +153,7 @@ assert.match(css, /\.announcement\{color:var\(--black\)/);
 assert.match(css, /:focus-visible\{outline:3px solid var\(--black\)/);
 assert.match(css, /\.faq-page \.tab-list button\[aria-selected=true\]\{color:var\(--white\);background:var\(--black\)/);
 assert.match(css, /\.announcement-details\{font-size:20px/);
+assert.match(css, /\.announcement-language\[lang=bo\]\{font-size:17px/);
 
 for (const file of builtFiles) {
   if (!['.html', '.css', '.js'].includes(extname(file))) continue;

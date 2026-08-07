@@ -71,6 +71,7 @@ p { margin: 0 0 1.25rem; }
 .announcement-details strong { font-size: 24px; }
 .announcement-languages { display: grid; grid-template-columns: 1fr 1fr; }
 .announcement-language { padding-inline: 55px; font-size: 15px; }
+.announcement-language[lang="bo"] { font-size: 17px; }
 .announcement-language:first-child { padding-left: 0; border-right: 1px solid rgb(255 255 255 / 45%); }
 .announcement-language:last-child { padding-right: 0; }
 .announcement-signature { margin-top: 36px; }
