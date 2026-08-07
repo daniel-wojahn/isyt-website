@@ -3,16 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { proceedings } from '../data/proceedings';
 ---
 
-<BaseLayout title="Proceedings | ISYT" bodyClass="inner-page listing-page">
+<BaseLayout title="Proceedings | ISYT" bodyClass="inner-page listing-page report-page">
   <section class="listing-heading content-width"><p>Proceedings</p><h1>ISYT Proceedings</h1></section>
-  <section class="card-grid content-width">
-    {[...proceedings].reverse().map((item) => (
-      <a class="listing-card" href={`/reports/${item.slug}/`}>
-        <div class="listing-media">
-          <img src={item.image} alt="" />
-          <div class="listing-overlay"><h2>{item.subtitle.replace('Proceedings of the ', '')}</h2></div>
-        </div>
-      </a>
-    ))}
+  <section class="card-grid-section">
+    <div class="card-grid content-width">
+      {[...proceedings].reverse().map((item) => (
+        <a class="listing-card" href={`/reports/${item.slug}/`}>
+          <div class="listing-media">
+            <img src={item.image} alt="" />
+            <div class="listing-overlay"><h2>{item.subtitle.replace('Proceedings of the ', '')}</h2></div>
+          </div>
+        </a>
+      ))}
+    </div>
   </section>
 </BaseLayout>

@@ -111,6 +111,10 @@ if (pages.has('/about-us/')) {
   assert.equal((about.match(/class="people-column"/g) ?? []).length, 2);
   assert.match(about, /class="role"/);
   assert.match(about, /class="statutes-intro"/);
+  assert.match(about, /data-about-history-bo/);
+  assert.equal((about.match(/class="about-row"/g) ?? []).length, 6);
+  assert.equal((about.match(/<details>/g) ?? []).length, 6);
+  assert.match(about, /<h2>རྒྱུན་དུ་འདྲི་བའི་དྲི་བ།<\/h2>/);
 }
 
 if (pages.has('/5th-isyt-conference-report/')) {

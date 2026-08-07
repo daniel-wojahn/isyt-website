@@ -8,7 +8,7 @@ interface Props {
 const { title, subtitle, editors, image, label, value, links, previous, next } = Astro.props;
 ---
 
-<BaseLayout title={`${title} | ISYT`} bodyClass="inner-page">
+<BaseLayout title={`${title} | ISYT`} bodyClass="inner-page report-page">
   <article class="proceeding-detail content-width">
     <img class="book-cover" src={image} alt="" />
     <div>
@@ -16,13 +16,13 @@ const { title, subtitle, editors, image, label, value, links, previous, next } =
       <h1>{title}</h1>
       <p class="subtitle">{subtitle}</p>
       <h2>Edited by:</h2>
-      <p>{editors.map((editor) => <>{editor}<br /></>)}</p>
+      <p>{editors.map((editor: string) => <>{editor}<br /></>)}</p>
       {label && <><h2>{label}</h2><p>{value}</p></>}
-      <div class="action-links">{links.map((link) => <a href={link.href}>{link.label}</a>)}</div>
+      <div class="action-links">{links.map((link: { label: string; href: string }) => <a href={link.href}>{link.label}</a>)}</div>
     </div>
   </article>
   <nav class="story-nav content-width" aria-label="Proceedings pagination">
-    {previous ? <a href={`/reports/${previous.slug}/`}>← <span>Previous</span> {previous.title}</a> : <span />}
-    {next && <a href={`/reports/${next.slug}/`}><span>Next</span> {next.title} →</a>}
+    {previous && <a class="story-nav-prev" href={`/reports/${previous.slug}/`}>← <span>Previous</span> {previous.title}</a>}
+    {next && <a class="story-nav-next" href={`/reports/${next.slug}/`}><span>Next</span> {next.title} →</a>}
   </nav>
 </BaseLayout>

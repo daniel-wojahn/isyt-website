@@ -9,20 +9,20 @@ interface Props {
 const { listTitle, title, conveners, sponsorship, city, year, cover, body, images, sponsorImages = [], downloads = [], previous, next } = Astro.props;
 ---
 
-<BaseLayout title={`${listTitle} | ISYT`} bodyClass="inner-page">
+<BaseLayout title={`${listTitle} | ISYT`} bodyClass="inner-page report-page">
   <section class="report-intro content-width">
     <div class="report-title"><h1>{title}</h1><p>Meeting report</p><img class="report-cover" src={cover} alt="" /></div>
     <div class="report-meta">
-      <div><h2>{conveners.length > 1 ? 'Conveners' : 'Convener'}</h2><p>{conveners.map((name) => <>{name}<br /></>)}</p></div>
+      <div><h2>{conveners.length > 1 ? 'Conveners' : 'Convener'}</h2><p>{conveners.map((name: string) => <>{name}<br /></>)}</p></div>
       <div><h2>City</h2><p>{city}</p><h2>Year</h2><p>{year}</p></div>
-      <div class="sponsors"><h2>Sponsorship</h2><p>{sponsorship}</p>{sponsorImages.map((image) => <img src={image.src} alt={image.alt} />)}</div>
-      {downloads.length > 0 && <div class="action-links">{downloads.map((link) => <a href={link.href}>{link.label}</a>)}</div>}
+      <div class="sponsors"><h2>Sponsorship</h2><p>{sponsorship}</p><div class="sponsor-logos">{sponsorImages.map((image: { src: string; alt: string }) => <img src={image.src} alt={image.alt} />)}</div></div>
+      {downloads.length > 0 && <div class="action-links">{downloads.map((link: { label: string; href: string }) => <a href={link.href}>{link.label}</a>)}</div>}
     </div>
   </section>
   <article class="report-copy content-width" set:html={body} />
   {images.length > 0 && <Gallery images={images} />}
   <nav class="story-nav content-width" aria-label="Conference reports pagination">
-    {previous ? <a href={`/${previous.slug}/`}>← <span>Previous story</span> {previous.listTitle}</a> : <span />}
-    {next && <a href={`/${next.slug}/`}><span>Next story</span> {next.listTitle} →</a>}
+    {previous && <a class="story-nav-prev" href={`/${previous.slug}/`}><span class="story-arrow">←</span><span>Previous report</span>{previous.listTitle}</a>}
+    {next && <a class="story-nav-next" href={`/${next.slug}/`}><span class="story-arrow">→</span><span>Next report</span>{next.listTitle}</a>}
   </nav>
 </BaseLayout>
