@@ -6,19 +6,39 @@ const { images } = Astro.props;
 
 <div class="gallery" data-gallery>
   {images.map((image) => <button type="button" data-src={image.src} data-alt={image.alt}><img src={image.src} alt={image.alt} loading="lazy" /></button>)}
-  <dialog><button class="dialog-close" type="button" aria-label="Close">×</button><img src="" alt="" /></dialog>
+  <dialog>
+    <button class="dialog-close" type="button" aria-label="Close">×</button>
+    <button class="dialog-previous" type="button" aria-label="Previous image">‹</button>
+    <img src="" alt="" />
+    <button class="dialog-next" type="button" aria-label="Next image">›</button>
+  </dialog>
 </div>
 
 <script>
   document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
     const dialog = gallery.querySelector<HTMLDialogElement>('dialog')!;
     const image = dialog.querySelector<HTMLImageElement>('img')!;
-    gallery.querySelectorAll<HTMLButtonElement>('[data-src]').forEach((button) => button.addEventListener('click', () => {
-      image.src = button.dataset.src!;
-      image.alt = button.dataset.alt!;
+    const buttons = [...gallery.querySelectorAll<HTMLButtonElement>('[data-src]')];
+    let index = 0;
+    let trigger: HTMLButtonElement;
+    const show = (next: number) => {
+      index = (next + buttons.length) % buttons.length;
+      image.src = buttons[index].dataset.src!;
+      image.alt = buttons[index].dataset.alt!;
+    };
+    buttons.forEach((button, buttonIndex) => button.addEventListener('click', () => {
+      trigger = button;
+      show(buttonIndex);
       dialog.showModal();
     }));
-    dialog.querySelector('button')?.addEventListener('click', () => dialog.close());
+    dialog.querySelector<HTMLButtonElement>('.dialog-close')?.addEventListener('click', () => dialog.close());
+    dialog.querySelector<HTMLButtonElement>('.dialog-previous')?.addEventListener('click', () => show(index - 1));
+    dialog.querySelector<HTMLButtonElement>('.dialog-next')?.addEventListener('click', () => show(index + 1));
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
     dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => trigger?.focus());
   });
 </script>

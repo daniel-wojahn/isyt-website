@@ -37,6 +37,7 @@ for (const route of routes) {
 
 for (const [route, html] of pages) {
   assert(!/wordpress|elementor|wp-content|wp-includes/i.test(html), `${route} contains WordPress output`);
+  assert(!/role="tabpanel"[^>]*\shidden(?:[=>\s])/i.test(html), `${route} hides tab content without JavaScript`);
 }
 
 const localTarget = (reference) => {
@@ -44,9 +45,16 @@ const localTarget = (reference) => {
   return extname(path) ? join(dist, path.slice(1)) : join(dist, path.slice(1), 'index.html');
 };
 
+async function checkReferences(references, label) {
+  for (const reference of references.filter((value) => value.startsWith('/') && !value.startsWith('//'))) {
+    await access(localTarget(reference)).catch(() => assert.fail(`${label} has a broken local reference: ${reference}`));
+  }
+}
+
 for (const [route, html] of pages) {
-  const references = [...html.matchAll(/(?:href|src)="(\/[^"#]*)"/g)].map((match) => match[1]);
-  for (const reference of references) await access(localTarget(reference)).catch(() => assert.fail(`${route} has a broken local reference: ${reference}`));
+  const attributes = [...html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)].map((match) => match[1]);
+  const sourceSets = [...html.matchAll(/\bsrcset=["']([^"']+)["']/g)].flatMap((match) => match[1].split(',').map((item) => item.trim().split(/\s+/, 1)[0]));
+  await checkReferences([...attributes, ...sourceSets], route);
 }
 
 if (pages.has('/')) {
@@ -67,6 +75,22 @@ if (pages.has('/about-us/')) {
   assert.match(about, /རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་ཚོགས་པའི་གཞུང་འབྲེལ་བཅའ་ཡིག/);
 }
 
+if (pages.has('/5th-isyt-conference-report/')) {
+  const report = pages.get('/5th-isyt-conference-report/');
+  assert.equal((report.match(/data-src=/g) ?? []).length, 11);
+  assert.match(report, /events\.spbu\.ru\/eventsContent\/events\/2018\/tibetology\/Program_2908\.pdf/);
+  assert.match(report, /Russian Foundation for Basic Research/);
+  assert.match(report, /dialog-previous/);
+  assert.match(report, /dialog-next/);
+}
+
+if (pages.has('/6th-isyt-conference-report/')) {
+  const report = pages.get('/6th-isyt-conference-report/');
+  assert.equal((report.match(/data-src=/g) ?? []).length, 9);
+  assert.match(report, /Participants in the various workshops learned/);
+  assert.match(report, /image_2023-05-05_114729037\.png/);
+}
+
 async function filesUnder(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
   const nested = await Promise.all(entries.map((entry) => {
@@ -80,6 +104,10 @@ for (const file of await filesUnder(dist)) {
   if (!['.html', '.css', '.js'].includes(extname(file))) continue;
   const contents = await readFile(file, 'utf8');
   assert(!/wp-content|wp-includes|elementor/i.test(contents), `${file} contains a legacy reference`);
+  if (extname(file) === '.css') {
+    const urls = [...contents.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)].map((match) => match[1]);
+    await checkReferences(urls, file);
+  }
 }
 
 for (const download of [

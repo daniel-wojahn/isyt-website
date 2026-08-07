@@ -13,7 +13,7 @@ const id = `tabs-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
   </div>
   <div class="tab-panels">
     {items.map((item, index) => (
-      <section id={`${id}-panel-${index}`} role="tabpanel" aria-labelledby={`${id}-tab-${index}`} hidden={index !== 0} set:html={item.content} />
+      <section id={`${id}-panel-${index}`} role="tabpanel" aria-labelledby={`${id}-tab-${index}`} set:html={item.content} />
     ))}
   </div>
 </div>
@@ -40,5 +40,6 @@ const id = `tabs-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
         buttons[next].focus();
       });
     });
+    select(0);
   });
 </script>
