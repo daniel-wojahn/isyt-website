@@ -62,13 +62,12 @@ p { margin: 0 0 1.25rem; }
 .hero-copy { padding-inline: 40px; }
 .hero-copy .eyebrow { width: fit-content; margin: 0 0 20px 25px; padding: 10px 7px 5px; background: rgb(0 0 0 / 5%); font-size: 22px; text-transform: uppercase; text-shadow: 4px 7px 16px rgb(0 0 0 / 52%); }
 .hero h1 { max-width: 760px; margin-bottom: 20px; padding: 15px; background: rgb(0 0 0 / 5%); font-size: clamp(44px, 5vw, 64px); letter-spacing: -2px; text-shadow: 4px 7px 16px rgb(0 0 0 / 52%); }
-.hero-date { width: fit-content; padding: 0 15px; font: 700 48px/1.2 "Josefin Sans", sans-serif; }
-.hero-location { width: fit-content; padding: 0 15px; font-size: 18px; letter-spacing: 1px; }
 .announcement { color: var(--black); background: var(--gold); }
 .announcement-wrap { padding-block: 90px; }
 .announcement-heading { width: min(100%, 900px); margin: 0 auto 65px; text-align: center; }
 .announcement-heading .eyebrow { margin-bottom: 10px; text-transform: uppercase; letter-spacing: 3px; }
-.announcement-heading h2 { margin-bottom: 0; font-size: clamp(42px, 6vw, 72px); }
+.announcement-heading h2 { margin-bottom: 18px; font-size: clamp(42px, 6vw, 72px); }
+.announcement-details strong { font-size: 20px; }
 .announcement-languages { display: grid; grid-template-columns: 1fr 1fr; }
 .announcement-language { padding-inline: 55px; font-size: 15px; }
 .announcement-language:first-child { padding-left: 0; border-right: 1px solid rgb(255 255 255 / 45%); }
@@ -237,7 +236,6 @@ p { margin: 0 0 1.25rem; }
   .hero-copy { padding-inline: 0; }
   .hero-copy .eyebrow { margin-left: 0; font-size: 16px; }
   .hero h1 { padding-left: 0; font-size: 48px; line-height: 1; }
-  .hero-date { padding-left: 20px; font-size: 42px; white-space: nowrap; }
   .announcement-wrap { padding-block: 60px; }
   .announcement-heading { margin-bottom: 45px; }
   .explore { gap: 35px; }

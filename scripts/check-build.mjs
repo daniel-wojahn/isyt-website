@@ -73,7 +73,7 @@ if (pages.has('/')) {
   assert.match(home, /name="q5_message"/);
   assert.match(home, /19–23 July 2027/);
   assert.match(home, /Korea University · Seoul, South Korea/);
-  assert.match(home, /Welcome to the 8th Seminar · Korea 2027/);
+  assert.match(home, /<p class="eyebrow">Welcome to the<\/p><h1>International Seminar of<br>Young Tibetologists<\/h1>/);
   assert.match(home, /isyt2027koreauniversity@gmail\.com/);
   assert.ok((home.match(/href="mailto:isyt2027koreauniversity@gmail\.com"/g) ?? []).length >= 3);
   assert.match(home, /We are delighted to announce/);
@@ -82,7 +82,10 @@ if (pages.has('/')) {
   assert(!home.includes('གྲོས་ཚོགས་འདིའི་ལོ་རྒྱུས་སོགས'));
   assert.match(home, /Seongmin, Anju, Seungjong, Shawo and Youjung/);
   assert.match(home, /class="announcement-languages"/);
-  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Save the date<\/p><h2>8th International Seminar of Young Tibetologists<\/h2><\/header>/);
+  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Save the date<\/p><h2>8th International Seminar of Young Tibetologists<\/h2><p class="announcement-details"><strong>19–23 July 2027<\/strong><br>Korea University · Seoul, South Korea<\/p><\/header>/);
+  const hero = home.match(/<section class="hero">(.*?)<\/section>/s)?.[1] ?? '';
+  assert(!hero.includes('19–23 July 2027'));
+  assert(!hero.includes('Korea University'));
   assert(!home.includes('23–27 August 2027'));
   assert(!home.includes('isyt2024@wolfson.ox.ac.uk'));
   assert(!home.includes('Document.pdf'));
