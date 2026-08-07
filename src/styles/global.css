@@ -68,8 +68,7 @@ p { margin: 0 0 1.25rem; }
 .announcement-wrap { padding-block: 90px; }
 .announcement-heading { width: min(100%, 900px); margin: 0 auto 65px; text-align: center; }
 .announcement-heading .eyebrow { margin-bottom: 10px; text-transform: uppercase; letter-spacing: 3px; }
-.announcement-heading h2 { margin-bottom: 18px; font-size: clamp(42px, 6vw, 72px); }
-.announcement-heading > p:last-child { font-weight: 700; }
+.announcement-heading h2 { margin-bottom: 0; font-size: clamp(42px, 6vw, 72px); }
 .announcement-languages { display: grid; grid-template-columns: 1fr 1fr; }
 .announcement-language { padding-inline: 55px; font-size: 15px; }
 .announcement-language:first-child { padding-left: 0; border-right: 1px solid rgb(255 255 255 / 45%); }

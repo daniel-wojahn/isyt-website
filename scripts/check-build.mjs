@@ -82,6 +82,7 @@ if (pages.has('/')) {
   assert(!home.includes('གྲོས་ཚོགས་འདིའི་ལོ་རྒྱུས་སོགས'));
   assert.match(home, /Seongmin, Anju, Seungjong, Shawo and Youjung/);
   assert.match(home, /class="announcement-languages"/);
+  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Save the date<\/p><h2>8th International Seminar of Young Tibetologists<\/h2><\/header>/);
   assert(!home.includes('23–27 August 2027'));
   assert(!home.includes('isyt2024@wolfson.ox.ac.uk'));
   assert(!home.includes('Document.pdf'));
