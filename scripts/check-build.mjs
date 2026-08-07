@@ -10,19 +10,20 @@ const allRoutes = [
   '/proceedings/',
   '/previous-seminars/',
   '/conference-faq/',
-  '/1st-isyt-conference-report/',
-  '/2nd-isyt-conference-report/',
-  '/3rd-isyt-conference-report/',
-  '/4th-isyt-conference-report/',
-  '/5th-isyt-conference-report/',
-  '/6th-isyt-conference-report/',
-  '/reports/1st-isyt-proceedings/',
-  '/reports/2nd-isyt-proceedings-pt-1/',
-  '/reports/2nd-isyt-proceedings-pt-2/',
-  '/reports/3rd-isyt-proceedings-2012/',
-  '/reports/4th-isyt-proceedings-2015/',
-  '/reports/5th-isyt-proceedings/',
-  '/reports/6th-isyt-proceedings/',
+  '/conference-reports/1st-isyt-conference-report/',
+  '/conference-reports/2nd-isyt-conference-report/',
+  '/conference-reports/3rd-isyt-conference-report/',
+  '/conference-reports/4th-isyt-conference-report/',
+  '/conference-reports/5th-isyt-conference-report/',
+  '/conference-reports/6th-isyt-conference-report/',
+  '/conference-reports/7th-isyt-conference-report/',
+  '/proceedings/1st-isyt-proceedings/',
+  '/proceedings/2nd-isyt-proceedings-pt-1/',
+  '/proceedings/2nd-isyt-proceedings-pt-2/',
+  '/proceedings/3rd-isyt-proceedings-2012/',
+  '/proceedings/4th-isyt-proceedings-2015/',
+  '/proceedings/5th-isyt-proceedings/',
+  '/proceedings/6th-isyt-proceedings/',
 ];
 const requested = process.argv.slice(2);
 const routes = requested.length ? requested : allRoutes;
@@ -82,7 +83,7 @@ if (pages.has('/')) {
   assert(!home.includes('གྲོས་ཚོགས་འདིའི་ལོ་རྒྱུས་སོགས'));
   assert.match(home, /Seongmin, Anju, Seungjong, Shawo and Youjung/);
   assert.match(home, /class="announcement-languages"/);
-  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Save the date<\/p><h2>8th ISYT<\/h2><p class="announcement-details"><strong>19–23 July 2027<\/strong><br>Korea University · Seoul, South Korea<\/p><\/header>/);
+  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Save the date<\/p><h2>8th International Seminar of Young Tibetologists<\/h2><p class="announcement-date">19–23 July 2027<\/p><p class="announcement-venue">Korea University · Seoul, South Korea<\/p><\/header>/);
   const hero = home.match(/<section class="hero">(.*?)<\/section>/s)?.[1] ?? '';
   assert(!hero.includes('19–23 July 2027'));
   assert(!hero.includes('Korea University'));
@@ -105,20 +106,19 @@ if (pages.has('/about-us/')) {
   const about = pages.get('/about-us/');
   assert.match(about, /data-language="en"/);
   assert.match(about, /data-language="bo"/);
-  assert.match(about, /རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་ཚོགས་པའི་སྐོར།/);
+  assert.match(about, /རྒྱབ་ལྗོངས་ཀྱི་ལོ་རྒྱུས།/);
   assert.match(about, /རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་ཚོགས་པའི་གཞུང་འབྲེལ་བཅའ་ཡིག/);
   assert.match(about, /class="gallery" data-gallery/, 'About gallery was removed');
   assert.equal((about.match(/class="people-column"/g) ?? []).length, 2);
   assert.match(about, /class="role"/);
   assert.match(about, /class="statutes-intro"/);
-  assert.match(about, /data-about-history-bo/);
   assert.equal((about.match(/class="about-row"/g) ?? []).length, 6);
   assert.equal((about.match(/<details>/g) ?? []).length, 6);
   assert.match(about, /<h2>རྒྱུན་དུ་འདྲི་བའི་དྲི་བ།<\/h2>/);
 }
 
-if (pages.has('/5th-isyt-conference-report/')) {
-  const report = pages.get('/5th-isyt-conference-report/');
+if (pages.has('/conference-reports/5th-isyt-conference-report/')) {
+  const report = pages.get('/conference-reports/5th-isyt-conference-report/');
   assert.equal((report.match(/data-src=/g) ?? []).length, 11);
   assert.match(report, /events\.spbu\.ru\/eventsContent\/events\/2018\/tibetology\/Program_2908\.pdf/);
   assert.match(report, /Russian Foundation for Basic Research/);
@@ -126,11 +126,11 @@ if (pages.has('/5th-isyt-conference-report/')) {
   assert.match(report, /dialog-next/);
 }
 
-if (pages.has('/6th-isyt-conference-report/')) {
-  const report = pages.get('/6th-isyt-conference-report/');
+if (pages.has('/conference-reports/6th-isyt-conference-report/')) {
+  const report = pages.get('/conference-reports/6th-isyt-conference-report/');
   assert.equal((report.match(/data-src=/g) ?? []).length, 9);
   assert.match(report, /Participants in the various workshops learned/);
-  assert.match(report, /image_2023-05-05_114729037\.png/);
+  assert.match(report, /khyentse-foundation\.png/);
 }
 
 async function filesUnder(directory) {
@@ -149,14 +149,13 @@ const css = (await Promise.all(
 assert.match(css, /prefers-reduced-motion:\s*reduce/);
 assert.match(css, /\.listing-page \.menu-toggle/);
 assert.match(css, /\.listing-card:is\(:hover,\s*:focus-visible\) \.listing-overlay/);
-assert.match(css, /\.about-history a/);
 assert.match(css, /\.about-history \.faq-list summary/);
 assert.match(css, /\.statutes \.tab-list button:is\([^}]*aria-selected=["']?true["']?/);
 assert.match(css, /--link:#76501c/);
 assert.match(css, /\.announcement\{color:var\(--black\)/);
 assert.match(css, /:focus-visible\{outline:3px solid var\(--black\)/);
-assert.match(css, /\.faq-page \.tab-list button\[aria-selected=true\]\{color:var\(--white\);background:var\(--black\)/);
-assert.match(css, /\.announcement-details\{font-size:20px/);
+assert.match(css, /\.statutes \.tab-list button:is\(:hover,:focus-visible,\[aria-selected=true\]\)\{color:var\(--white\);background:var\(--black\)/);
+assert.match(css, /\.announcement-date\{font-family:Josefin Sans/);
 assert.match(css, /\.announcement-language\[lang=bo\]\{font-size:17px/);
 
 for (const file of builtFiles) {
@@ -171,8 +170,7 @@ for (const file of builtFiles) {
 }
 
 for (const download of [
-  '7th ISYT-Call for Papers.pdf', '7th-ISYT-first_announcement.pdf', 'Book-of-Abstracts_FINAL.pdf',
-  'ISYT2024--poster_template.pptx', 'LMH-instructions.pdf', 'Presentation_Q&A.pdf',
+  'Book-of-Abstracts_FINAL.pdf', 'ISYT2024--poster_template.pptx',
   'archive/ISYT-Paris-Programme-2009.pdf',
 ]) await access(join(dist, download));
 

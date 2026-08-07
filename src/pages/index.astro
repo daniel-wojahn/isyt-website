@@ -50,7 +50,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <a href="/proceedings/"><h2>Proceedings</h2><p>All ISYT conference proceedings from past seminars at a glance</p></a>
       <a href="/previous-seminars/"><h2>Previous<br />Conferences</h2><p>Meeting reports and insights into past seminars</p></a>
     </div>
-    <img src="/assets/2023/05/audience-detail6.png" width="936" height="624" alt="Audience at an ISYT conference" loading="lazy" />
+    <img src="/assets/site/audience-explore.png" width="936" height="624" alt="Audience at an ISYT conference" loading="lazy" />
   </section>
 
   <section class="contact-section dark-section">
@@ -59,8 +59,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <form action="https://eu-submit.jotform.com/submit/231243775978065" method="post" id="231243775978065">
         <input type="hidden" name="formID" value="231243775978065" />
         <input type="hidden" name="simple_spc" value="231243775978065-231243775978065" />
-        <label>Name <span aria-hidden="true">*</span><input name="q6_name" required /></label>
-        <label>Email <span aria-hidden="true">*</span><input type="email" name="q4_email" placeholder="example@example.com" required /></label>
+        <label>Name <span aria-hidden="true">*</span><input name="q6_name" autocomplete="name" required /></label>
+        <label>Email <span aria-hidden="true">*</span><input type="email" name="q4_email" autocomplete="email" placeholder="example@example.com" required /></label>
         <label>Message <span aria-hidden="true">*</span><textarea name="q5_message" required></textarea></label>
         <input class="honeypot" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <button type="submit">Submit</button>

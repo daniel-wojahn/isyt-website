@@ -3,12 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { conferences } from '../data/conferences';
 ---
 
-<BaseLayout title="Previous Seminars | ISYT" bodyClass="inner-page listing-page report-page">
+<BaseLayout title="Previous Seminars | ISYT" description="Meeting reports and insights from past International Seminar of Young Tibetologists conferences." bodyClass="inner-page listing-page report-page">
   <section class="listing-heading content-width"><p>In retrospect</p><h1>Seminar reports</h1></section>
   <section class="card-grid-section">
     <div class="card-grid content-width">
       {[...conferences].reverse().map((item) => (
-        <a class="listing-card" href={`/${item.slug}/`}>
+        <a class="listing-card" href={`/conference-reports/${item.slug}/`}>
           <div class="listing-media">
             <img src={item.cover} alt="" />
             <div class="listing-overlay"><h2>{item.listTitle}</h2></div>

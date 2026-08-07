@@ -1,6 +1,6 @@
 ---
-import ConferenceReportLayout from '../layouts/ConferenceReportLayout.astro';
-import { conferences } from '../data/conferences';
+import ConferenceReportLayout from '../../layouts/ConferenceReportLayout.astro';
+import { conferences } from '../../data/conferences';
 
 export function getStaticPaths() {
   return conferences.map((item, index) => ({

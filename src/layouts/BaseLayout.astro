@@ -22,9 +22,13 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <link rel="icon" href="/assets/2020/12/lion-150x150.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/assets/branding/lion-icon.png" />
     <link rel="preload" href="/assets/fonts/josefinsans-qw3azqnved7rkgkxtqiqx5eudxx4.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/assets/fonts/biryani-hv-wlznxifoo84ydfustpa.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/qomolangma-uchen-sarchen.woff2" as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
   </head>
   <body id="top" class={bodyClass}>

@@ -9,8 +9,8 @@ const links = [
 
 <header class="site-header">
   <a class="site-logo" href="/" aria-label="International Seminar of Young Tibetologists home">
-    <img class="logo-light" src="/assets/2023/05/isyt-logo-trans-white.png" alt="International Seminar of Young Tibetologists" />
-    <img class="logo-dark" src="/assets/2023/05/isyt-logo-trans-black.png" alt="International Seminar of Young Tibetologists" />
+    <img class="logo-light" src="/assets/branding/logo-white.png" alt="International Seminar of Young Tibetologists" />
+    <img class="logo-dark" src="/assets/branding/logo-black.png" alt="International Seminar of Young Tibetologists" />
   </a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
     <span class="menu-label">Menu</span>
@@ -21,7 +21,10 @@ const links = [
   <nav id="site-navigation" class="site-navigation" aria-label="Main navigation">
     <a class="menu-eyebrow" href="/">International Seminar of Young Tibetologists</a>
     <ul>
-      {links.map(([href, label]) => <li><a href={href}>{label}</a></li>)}
+      {links.map(([href, label]) => {
+        const isCurrent = Astro.url.pathname === href;
+        return <li><a href={href} aria-current={isCurrent ? 'page' : undefined}>{label}</a></li>;
+      })}
     </ul>
   </nav>
 </header>

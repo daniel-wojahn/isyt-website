@@ -8,7 +8,7 @@ interface Props {
 const { title, subtitle, editors, image, label, value, links, previous, next } = Astro.props;
 ---
 
-<BaseLayout title={`${title} | ISYT`} bodyClass="inner-page report-page">
+<BaseLayout title={`${title} | ISYT`} description={subtitle} bodyClass="inner-page report-page">
   <article class="proceeding-detail content-width">
     <img class="book-cover" src={image} alt="" />
     <div>
@@ -22,7 +22,7 @@ const { title, subtitle, editors, image, label, value, links, previous, next } =
     </div>
   </article>
   <nav class="story-nav content-width" aria-label="Proceedings pagination">
-    {previous && <a class="story-nav-prev" href={`/reports/${previous.slug}/`}>← <span>Previous</span> {previous.title}</a>}
-    {next && <a class="story-nav-next" href={`/reports/${next.slug}/`}><span>Next</span> {next.title} →</a>}
+    {previous && <a class="story-nav-prev" href={`/proceedings/${previous.slug}/`}><span class="story-arrow">←</span><span>Previous proceedings</span>{previous.title}</a>}
+    {next && <a class="story-nav-next" href={`/proceedings/${next.slug}/`}><span class="story-arrow">→</span><span>Next proceedings</span>{next.title}</a>}
   </nav>
 </BaseLayout>

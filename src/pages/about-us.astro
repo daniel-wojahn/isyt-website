@@ -7,10 +7,10 @@ import aboutBo from '../content/about-bo.html?raw';
 import statutesBoRaw from '../content/statutes-bo.html?raw';
 
 const images = [
-  { src: '/assets/2023/05/Young-Tibetologists-1977.png', alt: 'Young Tibetologists in 1977' },
-  { src: '/assets/2020/12/image_2023-05-05_104510251.png', alt: 'ISYT conference participants' },
-  { src: '/assets/2023/05/4thISYT.png', alt: 'Fourth ISYT conference participants' },
-  { src: '/assets/2023/05/group-outside.jpg', alt: 'ISYT conference group outside' },
+  { src: '/assets/about/young-tibetologists-1977.png', alt: 'Young Tibetologists in 1977' },
+  { src: '/assets/conferences/1st/cover.png', alt: 'ISYT conference participants' },
+  { src: '/assets/conferences/4th/cover.png', alt: 'Fourth ISYT conference participants' },
+  { src: '/assets/conferences/5th/cover.jpg', alt: 'ISYT conference group outside' },
 ];
 
 const aboutBoFaqStart = aboutBo.lastIndexOf('<article class="about-row">');
@@ -45,7 +45,7 @@ const statutesBo = statutesBoLabels.map((label, index) => ({
 }));
 ---
 
-<BaseLayout title="About the ISYT" bodyClass="about-page report-page">
+<BaseLayout title="About the ISYT" description="The history of the ISYT, its statutes, board of advisors, and frequently asked questions." bodyClass="about-page report-page">
   <section class="listing-heading page-heading content-width">
     <p>Who we are</p>
     <h1>About the ISYT</h1>

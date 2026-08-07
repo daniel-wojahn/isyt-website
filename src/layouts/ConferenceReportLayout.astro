@@ -3,26 +3,26 @@ import BaseLayout from './BaseLayout.astro';
 import Gallery from '../components/Gallery.astro';
 interface Props {
   listTitle: string; title: string; conveners: string[]; sponsorship: string; city: string; year: string; cover: string; body: string;
-  images: { src: string; alt: string }[]; sponsorImages?: { src: string; alt: string }[]; downloads?: { label: string; href: string }[];
+  images: { src: string; alt: string }[]; sponsorImages?: { src: string; alt: string; dark?: boolean }[]; downloads?: { label: string; href: string }[];
   previous?: { slug: string; listTitle: string }; next?: { slug: string; listTitle: string };
 }
 const { listTitle, title, conveners, sponsorship, city, year, cover, body, images, sponsorImages = [], downloads = [], previous, next } = Astro.props;
 ---
 
-<BaseLayout title={`${listTitle} | ISYT`} bodyClass="inner-page report-page">
+<BaseLayout title={`${listTitle} | ISYT`} description={`Meeting report: ${title}, ${city} ${year}.`} bodyClass="inner-page report-page">
   <section class="report-intro content-width">
     <div class="report-title"><h1>{title}</h1><p>Meeting report</p><img class="report-cover" src={cover} alt="" /></div>
     <div class="report-meta">
       <div><h2>{conveners.length > 1 ? 'Conveners' : 'Convener'}</h2><p>{conveners.map((name: string) => <>{name}<br /></>)}</p></div>
       <div><h2>City</h2><p>{city}</p><h2>Year</h2><p>{year}</p></div>
-      <div class="sponsors"><h2>Sponsorship</h2><p>{sponsorship}</p><div class="sponsor-logos">{sponsorImages.map((image: { src: string; alt: string }) => <img src={image.src} alt={image.alt} />)}</div></div>
+      <div class="sponsors"><h2>Sponsorship</h2><p>{sponsorship}</p><div class="sponsor-logos">{sponsorImages.map((image: { src: string; alt: string; dark?: boolean }) => <div class={`sponsor-logo${image.dark ? ' sponsor-logo-dark' : ''}`}><img src={image.src} alt={image.alt} /></div>)}</div></div>
       {downloads.length > 0 && <div class="action-links">{downloads.map((link: { label: string; href: string }) => <a href={link.href}>{link.label}</a>)}</div>}
     </div>
   </section>
   <article class="report-copy content-width" set:html={body} />
   {images.length > 0 && <Gallery images={images} />}
   <nav class="story-nav content-width" aria-label="Conference reports pagination">
-    {previous && <a class="story-nav-prev" href={`/${previous.slug}/`}><span class="story-arrow">←</span><span>Previous report</span>{previous.listTitle}</a>}
-    {next && <a class="story-nav-next" href={`/${next.slug}/`}><span class="story-arrow">→</span><span>Next report</span>{next.listTitle}</a>}
+    {previous && <a class="story-nav-prev" href={`/conference-reports/${previous.slug}/`}><span class="story-arrow">←</span><span>Previous report</span>{previous.listTitle}</a>}
+    {next && <a class="story-nav-next" href={`/conference-reports/${next.slug}/`}><span class="story-arrow">→</span><span>Next report</span>{next.listTitle}</a>}
   </nav>
 </BaseLayout>
