@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "Josefin Sans";
+  src: url("/assets/fonts/josefinsans-qw3azqnved7rkgkxtqiqx5eudxx4.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Biryani";
+  src: url("/assets/fonts/biryani-hv-wlznxifoo84ydfustpa.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --gold: #ce933a;
+  --link: #b98535;
+  --black: #000;
+  --white: #fff;
+  --gray: #797979;
+  --content: 1190px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: var(--black); background: var(--white); font: 16px/1.75 "Biryani", Arial, sans-serif; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--gold); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+[hidden] { display: none !important; }
+h1, h2, h3, h4 { margin-top: 0; font-family: "Josefin Sans", Arial, sans-serif; line-height: 1.05; }
+p { margin: 0 0 1.25rem; }
+.content-width { width: min(calc(100% - 40px), var(--content)); margin-inline: auto; }
+.dark-section { color: var(--white); background: var(--black); }
+.site-header { position: absolute; z-index: 20; top: 0; left: 50%; display: flex; width: min(calc(100% - 40px), var(--content)); min-height: 120px; align-items: center; justify-content: space-between; transform: translateX(-50%); }
+.site-logo img { width: 400px; }
+.site-navigation { position: absolute; top: 92px; right: 0; display: none; width: min(340px, 90vw); padding: 28px; background: var(--gold); }
+.site-navigation.is-open { display: block; }
+.site-navigation ul { display: flex; flex-direction: column; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.site-navigation a { color: var(--white); font: 400 14px/1 "Biryani", sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+.menu-toggle { display: flex; gap: 10px; align-items: center; border: 0; color: var(--white); background: transparent; font: inherit; cursor: pointer; }
+.menu-toggle span:first-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.menu-toggle span:last-child { font-size: 34px; line-height: 1; }
+.hero { min-height: 684px; padding-top: 225px; color: var(--white); background: linear-gradient(90deg, rgba(0,0,0,.7), rgba(0,0,0,.08)), url("/assets/2023/05/header-1024x683-1.png") center/cover no-repeat; }
+.hero-copy { padding-inline: 40px; }
+.hero-copy .eyebrow { width: fit-content; margin: 0 0 20px 25px; padding: 10px 7px 5px; background: rgb(0 0 0 / 5%); font-size: 22px; text-transform: uppercase; text-shadow: 4px 7px 16px rgb(0 0 0 / 52%); }
+.hero h1 { max-width: 760px; margin-bottom: 20px; padding: 15px; background: rgb(0 0 0 / 5%); font-size: clamp(44px, 5vw, 64px); letter-spacing: -2px; text-shadow: 4px 7px 16px rgb(0 0 0 / 52%); }
+.hero-date { width: fit-content; padding: 0 15px; font: 700 48px/1.2 "Josefin Sans", sans-serif; }
+.announcement { background: var(--gold); }
+.split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding-block: 90px; }
+.announcement h2 { font-size: clamp(36px, 5vw, 56px); }
+.announcement h2 span { font-family: "Noto Serif Tibetan", "Microsoft Himalaya", serif; font-size: .8em; line-height: 1.5; }
+.announcement-copy { font-size: 15px; }
+[lang="bo"] { font-family: "Noto Serif Tibetan", "Microsoft Himalaya", serif; line-height: 1.9; }
+.tibetan-highlight { padding: 6px; background: var(--gold); }
+.explore { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; padding-block: 110px; }
+.feature-links a { display: block; padding-block: 22px; border-bottom: 1px solid #d8d8d8; color: var(--black); }
+.feature-links a:last-child { border-bottom: 0; }
+.feature-links h2 { margin-bottom: 10px; font-size: 25px; }
+.feature-links p { margin: 0; color: var(--gray); font-size: 14px; }
+.contact-section { padding: 0 0 100px; }
+.contact-section > h2 { margin-bottom: 40px; font-size: clamp(48px, 7vw, 78px); }
+.contact-grid { display: grid; grid-template-columns: 1fr 2fr; }
+.contact-photo { min-height: 560px; background: url("/assets/2023/05/daniele-salutari-NAdinUQTy2c-unsplash-scaled.jpg") center/cover; }
+.contact-grid form { display: grid; gap: 24px; padding: 52px 70px; color: var(--white); background: var(--black); }
+.contact-grid label { display: grid; gap: 8px; font-weight: 600; }
+.contact-grid input, .contact-grid textarea { width: 100%; border: 0; border-bottom: 1px solid #777; border-radius: 0; padding: 12px 2px; color: var(--white); background: transparent; font: inherit; }
+.contact-grid textarea { min-height: 150px; resize: vertical; }
+.contact-grid button { justify-self: start; border: 0; padding: 14px 28px 10px; color: var(--white); background: var(--gold); font: 600 14px/1 "Biryani", sans-serif; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
+.honeypot { position: absolute; left: -9999px; }
+.site-footer { position: relative; padding: 44px 20px; color: var(--white); background: var(--black); }
+.footer-inner { display: grid; width: min(100%, var(--content)); margin: auto; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 30px; }
+.footer-copy p { margin: 0; font-size: 12px; }
+.footer-mark { width: 92px; }
+.footer-links { display: flex; justify-content: flex-end; gap: 22px; }
+.footer-links a, .back-to-top { color: var(--white); font-size: 13px; }
+.back-to-top { position: absolute; right: 20px; bottom: 10px; }
+
+@media (max-width: 900px) {
+  .site-logo img { width: 280px; }
+  .split-section, .explore { grid-template-columns: 1fr; }
+  .explore { padding-block: 70px; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .content-width { width: min(calc(100% - 30px), var(--content)); }
+  .site-header { width: calc(100% - 30px); min-height: 90px; }
+  .site-logo img { width: 400px; max-width: none; }
+  .menu-toggle { display: none; }
+  .hero { min-height: 410px; margin-bottom: 60px; padding-top: 130px; }
+  .hero-copy { padding-inline: 0; }
+  .hero-copy .eyebrow { margin-left: 0; font-size: 16px; }
+  .hero h1 { padding-left: 0; font-size: 48px; line-height: 1; }
+  .hero-date { padding-left: 20px; font-size: 42px; white-space: nowrap; }
+  .split-section { gap: 30px; padding-block: 60px; }
+  .announcement h2 { font-size: 68px; }
+  .explore { gap: 35px; }
+  .contact-section { padding-bottom: 60px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-photo { min-height: 260px; }
+  .contact-grid form { padding: 36px 24px; }
+  .footer-inner { grid-template-columns: 1fr auto; }
+  .footer-mark { display: none; }
+  .footer-links { flex-direction: column; gap: 6px; }
+}

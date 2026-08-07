@@ -1,0 +1,32 @@
+---
+const links = [
+  ['/about-us/', 'About us'],
+  ['/proceedings/', 'Proceedings'],
+  ['/previous-seminars/', 'Previous Seminars'],
+  ['/conference-faq/', 'Conference FAQs'],
+];
+---
+
+<header class="site-header">
+  <a class="site-logo" href="/" aria-label="International Seminar of Young Tibetologists home">
+    <img src="/assets/2023/05/isyt-logo-trans-white.png" alt="International Seminar of Young Tibetologists" />
+  </a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+    <span>Menu</span><span aria-hidden="true">☰</span>
+  </button>
+  <nav id="site-navigation" class="site-navigation" aria-label="Main navigation">
+    <ul>
+      {links.map(([href, label]) => <li><a href={href}>{label}</a></li>)}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const navigation = document.querySelector<HTMLElement>('#site-navigation');
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    navigation?.classList.toggle('is-open', !expanded);
+  });
+</script>
