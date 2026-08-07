@@ -93,7 +93,7 @@ p { margin: 0 0 1.25rem; }
 .gallery dialog::backdrop { background: rgb(0 0 0 / 85%); }
 .gallery dialog img { max-height: 85vh; margin: auto; }
 .dialog-close { position: absolute; z-index: 1; top: 0; right: 0; border: 0; padding: 4px 14px; color: var(--white); background: var(--black); font-size: 30px; cursor: pointer; }
-.about-history { padding-block: 100px; }
+.about-history { padding-block: 100px; background: var(--gold); }
 .about-row { display: grid; grid-template-columns: 1fr 2fr; gap: 70px; padding-block: 52px; border-bottom: 1px solid #555; }
 .about-row:first-child { padding-top: 0; }
 .about-row:last-child { padding-bottom: 0; border-bottom: 0; }
@@ -105,7 +105,7 @@ p { margin: 0 0 1.25rem; }
 .people { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-block: 100px; }
 .people h2 { margin-bottom: 5px; font-size: 34px; }
 .people p { color: var(--gray); }
-.statutes { padding-block: 110px; }
+.statutes { padding-block: 110px; background: var(--gold); }
 .statutes h2 { font-size: clamp(48px, 6vw, 78px); }
 .tabs { display: grid; grid-template-columns: minmax(240px, .7fr) 2fr; gap: 45px; margin-top: 55px; }
 .tab-list { display: flex; flex-direction: column; }
@@ -113,6 +113,48 @@ p { margin: 0 0 1.25rem; }
 .tab-list button[aria-selected="true"] { color: var(--gold); }
 .tab-panels { min-height: 350px; }
 .tab-panels p { text-align: justify; }
+.inner-page main { min-height: 75vh; padding-top: 150px; background: var(--white); }
+.inner-page .site-header { color: var(--gold); }
+.inner-page .menu-toggle { color: var(--gold); }
+.listing-heading { padding: 60px 0 75px; }
+.listing-heading > p, .report-title > p, .proceeding-detail .eyebrow { margin: 0 0 16px; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; }
+.listing-heading h1, .report-title h1 { max-width: 900px; margin: 0; font-size: clamp(54px, 7vw, 92px); letter-spacing: -3px; }
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 65px 35px; padding-bottom: 110px; }
+.listing-card { color: var(--black); }
+.listing-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; filter: grayscale(1); transition: filter .2s; }
+.listing-card:hover img { filter: none; }
+.listing-card h2 { margin: 22px 0 0; font-size: 30px; }
+.listing-page main { background: var(--gold); }
+.listing-page .listing-heading > p, .listing-page .listing-card { color: var(--white); }
+.listing-page .card-grid { grid-template-columns: repeat(4, 1fr); gap: 15px; }
+.listing-page .listing-card h2 { font-size: 22px; }
+.listing-page .listing-card img { aspect-ratio: 3 / 4; object-fit: cover; filter: none; }
+.proceeding-detail { display: grid; grid-template-columns: minmax(280px, .8fr) 1.2fr; gap: 75px; align-items: start; padding: 65px 0 90px; }
+.book-cover { width: 100%; max-height: 720px; object-fit: contain; }
+.proceeding-detail h1 { font-size: clamp(38px, 4vw, 52px); letter-spacing: -2px; }
+.proceeding-detail .subtitle { color: var(--gray); font-size: 20px; }
+.proceeding-detail h2, .report-meta h2 { margin: 32px 0 5px; font-size: 19px; text-transform: uppercase; letter-spacing: 1px; }
+.action-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 35px; }
+.action-links a { display: inline-block; padding: 13px 20px 9px; color: var(--white); background: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+.story-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding-block: 45px 80px; border-top: 1px solid #ddd; }
+.story-nav a:last-child { text-align: right; }
+.story-nav span { display: block; color: var(--gray); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.report-intro { display: grid; grid-template-columns: 1fr 1.05fr; gap: 25px; padding-block: 55px 85px; }
+.report-title { display: flex; flex-direction: column; }
+.report-title h1 { order: 0; font-size: 44px; letter-spacing: -1px; }
+.report-title > p { order: 1; }
+.report-cover { order: 2; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.report-meta { display: grid; grid-template-columns: 1fr 1fr; align-content: start; gap: 25px 50px; padding: 45px 60px; color: var(--white); background: var(--gold); }
+.report-meta h2 { color: var(--white); }
+.report-meta .action-links { grid-column: 1 / -1; margin: 0; }
+.report-meta .action-links a { padding-left: 0; text-decoration: underline; }
+.report-copy { padding-block: 35px 90px; font-size: 17px; column-count: 2; column-gap: 70px; border-top: 1px solid #ddd; }
+.report-copy p { margin-bottom: 1.8rem; }
+.faq-page { padding-block: 20px 110px; color: var(--black); background: var(--white); }
+.faq-page .tabs { margin-top: 0; }
+.faq-page .tab-panels { max-height: 70vh; overflow-y: auto; padding-right: 25px; }
+.faq-page .tab-list button { border-color: #ddd; color: var(--black); }
+.faq-page .tab-list button[aria-selected="true"], .faq-page h4, .faq-page h5 { color: var(--gold); }
 
 @media (max-width: 900px) {
   .site-logo img { width: 280px; }
@@ -120,6 +162,8 @@ p { margin: 0 0 1.25rem; }
   .explore { padding-block: 70px; }
   .gallery { grid-template-columns: repeat(2, 1fr); }
   .about-row { grid-template-columns: 1fr; gap: 20px; }
+  .proceeding-detail { gap: 40px; }
+  .listing-page .card-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
@@ -152,4 +196,13 @@ p { margin: 0 0 1.25rem; }
   .people, .tabs { grid-template-columns: 1fr; gap: 35px; }
   .tab-list { display: grid; grid-template-columns: 1fr 1fr; }
   .tab-list button { padding: 12px 6px; }
+  .inner-page main { padding-top: 95px; }
+  .listing-heading { padding-block: 50px; }
+  .listing-heading h1, .report-title h1 { font-size: 55px; letter-spacing: -2px; }
+  .card-grid, .proceeding-detail, .report-intro, .report-meta { grid-template-columns: 1fr; }
+  .card-grid { gap: 45px; padding-bottom: 70px; }
+  .proceeding-detail { padding-top: 45px; }
+  .report-meta { gap: 5px; padding-block: 45px; }
+  .report-copy { column-count: 1; }
+  .faq-page .tab-panels { max-height: none; overflow: visible; padding-right: 0; }
 }

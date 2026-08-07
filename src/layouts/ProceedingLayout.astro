@@ -1,0 +1,28 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props {
+  title: string; subtitle: string; editors: string[]; image: string;
+  label?: string; value?: string; links: { label: string; href: string }[];
+  previous?: { slug: string; title: string }; next?: { slug: string; title: string };
+}
+const { title, subtitle, editors, image, label, value, links, previous, next } = Astro.props;
+---
+
+<BaseLayout title={`${title} | ISYT`} bodyClass="inner-page">
+  <article class="proceeding-detail content-width">
+    <img class="book-cover" src={image} alt="" />
+    <div>
+      <p class="eyebrow">ISYT Proceedings</p>
+      <h1>{title}</h1>
+      <p class="subtitle">{subtitle}</p>
+      <h2>Edited by:</h2>
+      <p>{editors.map((editor) => <>{editor}<br /></>)}</p>
+      {label && <><h2>{label}</h2><p>{value}</p></>}
+      <div class="action-links">{links.map((link) => <a href={link.href}>{link.label}</a>)}</div>
+    </div>
+  </article>
+  <nav class="story-nav content-width" aria-label="Proceedings pagination">
+    {previous ? <a href={`/reports/${previous.slug}/`}>← <span>Previous</span> {previous.title}</a> : <span />}
+    {next && <a href={`/reports/${next.slug}/`}><span>Next</span> {next.title} →</a>}
+  </nav>
+</BaseLayout>

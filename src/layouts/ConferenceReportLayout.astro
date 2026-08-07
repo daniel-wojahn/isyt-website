@@ -1,0 +1,28 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Gallery from '../components/Gallery.astro';
+interface Props {
+  listTitle: string; title: string; conveners: string[]; sponsorship: string; city: string; year: string; cover: string; body: string;
+  images: { src: string; alt: string }[]; downloads?: { label: string; href: string }[];
+  previous?: { slug: string; listTitle: string }; next?: { slug: string; listTitle: string };
+}
+const { listTitle, title, conveners, sponsorship, city, year, cover, body, images, downloads = [], previous, next } = Astro.props;
+---
+
+<BaseLayout title={`${listTitle} | ISYT`} bodyClass="inner-page">
+  <section class="report-intro content-width">
+    <div class="report-title"><h1>{title}</h1><p>Meeting report</p><img class="report-cover" src={cover} alt="" /></div>
+    <div class="report-meta">
+      <div><h2>{conveners.length > 1 ? 'Conveners' : 'Convener'}</h2><p>{conveners.map((name) => <>{name}<br /></>)}</p></div>
+      <div><h2>City</h2><p>{city}</p><h2>Year</h2><p>{year}</p></div>
+      <div><h2>Sponsorship</h2><p>{sponsorship}</p></div>
+      {downloads.length > 0 && <div class="action-links">{downloads.map((link) => <a href={link.href}>{link.label}</a>)}</div>}
+    </div>
+  </section>
+  <article class="report-copy content-width" set:html={body} />
+  {images.length > 0 && <Gallery images={images} />}
+  <nav class="story-nav content-width" aria-label="Conference reports pagination">
+    {previous ? <a href={`/${previous.slug}/`}>← <span>Previous story</span> {previous.listTitle}</a> : <span />}
+    {next && <a href={`/${next.slug}/`}><span>Next story</span> {next.listTitle} →</a>}
+  </nav>
+</BaseLayout>

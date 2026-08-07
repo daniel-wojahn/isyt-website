@@ -1,0 +1,14 @@
+---
+import ConferenceReportLayout from '../layouts/ConferenceReportLayout.astro';
+import { conferences } from '../data/conferences';
+
+export function getStaticPaths() {
+  return conferences.map((item, index) => ({
+    params: { report: item.slug },
+    props: { item, previous: conferences[index - 1], next: conferences[index + 1] },
+  }));
+}
+const { item, previous, next } = Astro.props;
+---
+
+<ConferenceReportLayout {...item} previous={previous} next={next} />

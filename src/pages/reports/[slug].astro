@@ -1,0 +1,14 @@
+---
+import ProceedingLayout from '../../layouts/ProceedingLayout.astro';
+import { proceedings } from '../../data/proceedings';
+
+export function getStaticPaths() {
+  return proceedings.map((item, index) => ({
+    params: { slug: item.slug },
+    props: { item, previous: proceedings[index - 1], next: proceedings[index + 1] },
+  }));
+}
+const { item, previous, next } = Astro.props;
+---
+
+<ProceedingLayout {...item} previous={previous} next={next} />

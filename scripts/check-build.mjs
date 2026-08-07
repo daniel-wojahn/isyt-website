@@ -39,6 +39,16 @@ for (const [route, html] of pages) {
   assert(!/wordpress|elementor|wp-content|wp-includes/i.test(html), `${route} contains WordPress output`);
 }
 
+const localTarget = (reference) => {
+  const path = decodeURIComponent(reference.split(/[?#]/, 1)[0]);
+  return extname(path) ? join(dist, path.slice(1)) : join(dist, path.slice(1), 'index.html');
+};
+
+for (const [route, html] of pages) {
+  const references = [...html.matchAll(/(?:href|src)="(\/[^"#]*)"/g)].map((match) => match[1]);
+  for (const reference of references) await access(localTarget(reference)).catch(() => assert.fail(`${route} has a broken local reference: ${reference}`));
+}
+
 if (pages.has('/')) {
   const home = pages.get('/');
   assert.match(home, /International Seminar of/);
@@ -71,5 +81,11 @@ for (const file of await filesUnder(dist)) {
   const contents = await readFile(file, 'utf8');
   assert(!/wp-content|wp-includes|elementor/i.test(contents), `${file} contains a legacy reference`);
 }
+
+for (const download of [
+  '7th ISYT-Call for Papers.pdf', '7th-ISYT-first_announcement.pdf', 'Book-of-Abstracts_FINAL.pdf',
+  'ISYT2024--poster_template.pptx', 'LMH-instructions.pdf', 'Presentation_Q&A.pdf',
+  'archive/ISYT-Paris-Programme-2009.pdf',
+]) await access(join(dist, download));
 
 console.log(`Verified ${routes.length} route(s).`);

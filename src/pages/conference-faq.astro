@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tabs from '../components/Tabs.astro';
+import accommodation from '../content/faq/accommodation.html?raw';
+import travelGrants from '../content/faq/travel-grants.html?raw';
+import abstracts from '../content/faq/abstracts.html?raw';
+import oxford from '../content/faq/oxford.html?raw';
+
+const items = [
+  { label: 'Accommodation', content: accommodation.replace('https://youngtibetologists.iats.info/LMH-instructions.pdf', '/LMH-instructions.pdf') },
+  { label: 'Travel Grants', content: travelGrants },
+  { label: 'Final upload of abstracts', content: abstracts },
+  { label: 'Getting to Oxford', content: oxford },
+];
+---
+
+<BaseLayout title="Conference FAQs | ISYT" bodyClass="inner-page">
+  <section class="listing-heading content-width"><p>Questions &amp; answers</p><h1>Conference FAQs</h1></section>
+  <section class="faq-page dark-section"><div class="content-width"><Tabs items={items} label="Conference FAQs" /></div></section>
+</BaseLayout>
