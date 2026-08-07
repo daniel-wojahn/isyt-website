@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Restore the original site's hover behavior, fix the hamburger regressions and low-contrast gold-on-gold text, and refine the bilingual About page while retaining its gallery strip.
+**Goal:** Restore the original site's hover behavior, fix the hamburger regressions and low-contrast gold-on-gold text, refine the bilingual About page, and publish the bilingual 2027 homepage announcement.
 
 **Architecture:** Keep the existing Astro components and add only semantic wrapper classes and native CSS transitions. Extend the current build checker so the required markup, contrast selectors, reduced-motion fallback, gallery, routes, assets, translations, and form remain covered.
 
@@ -17,6 +17,7 @@
 - Preserve all routes, downloads, JotForm fields, and no-JavaScript fallbacks.
 - Respect `prefers-reduced-motion: reduce`.
 - Do not include the user's existing `package.json` change in feature commits.
+- Do not expose or link the source `Document.pdf`.
 
 ---
 
@@ -301,7 +302,55 @@ git commit -m "fix: refine About layout and contrast"
 
 ---
 
-### Task 3: Browser verification and cleanup
+### Task 3: Bilingual 2027 homepage announcement and current footer
+
+**Files:**
+- Modify: `scripts/check-build.mjs`
+- Modify: `src/pages/index.astro`
+- Modify: `src/components/Footer.astro`
+- Modify: `src/styles/global.css`
+
+**Interfaces:**
+- Consumes: the supplied English PDF content and user-provided Tibetan text.
+- Produces: `.announcement-heading`, `.announcement-languages`, and `.announcement-language` content, the new conference email, and an automatically current copyright year.
+
+- [ ] **Step 1: Add failing homepage assertions**
+
+Extend the existing homepage and shared-output checks to require:
+
+```js
+assert.match(home, /19–23 July 2027/);
+assert.match(home, /Korea University · Seoul, South Korea/);
+assert.match(home, /isyt2027koreauniversity@gmail\.com/);
+assert.match(home, /Seongmin, Anju, Seungjong, Shawo and Youjung/);
+assert.match(home, /རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་གྲོས་ཚོགས་ཐེངས་བརྒྱད་པ།/);
+assert.match(home, /class="announcement-languages"/);
+assert(!home.includes('23–27 August 2027'));
+assert(!home.includes('isyt2024@wolfson.ox.ac.uk'));
+assert.match(home, /data-copyright-year/);
+```
+
+- [ ] **Step 2: Run the checker and confirm the homepage test fails**
+
+Run `npm run build && npm run check`. The checker must fail on the outdated homepage before implementation.
+
+- [ ] **Step 3: Replace the announcement and footer content**
+
+Update the hero date and venue, render the full English and supplied Tibetan text in two semantic language columns, update the email link, use the approved English convenor list exactly, and keep `Document.pdf` unlinked. Preserve the form unchanged.
+
+Set the footer year from `new Date().getFullYear()` at build time and update it from the visitor's current year with the existing native inline-script pattern. Add no dependency.
+
+- [ ] **Step 4: Add minimal responsive styles**
+
+Use the existing gold section and typography. Create a two-column `.announcement-languages` grid, a constrained centered heading, a subtle column divider, white underlined links, and a one-column mobile fallback.
+
+- [ ] **Step 5: Run the checker and commit Task 3**
+
+Run `npm run verify` and `git diff --check`, then commit only the homepage, footer, CSS, and checker changes.
+
+---
+
+### Task 4: Browser verification and cleanup
 
 **Files:**
 - Verify: `dist/`
