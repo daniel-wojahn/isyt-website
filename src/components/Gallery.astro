@@ -1,0 +1,24 @@
+---
+interface Image { src: string; alt: string }
+interface Props { images: Image[] }
+const { images } = Astro.props;
+---
+
+<div class="gallery" data-gallery>
+  {images.map((image) => <button type="button" data-src={image.src} data-alt={image.alt}><img src={image.src} alt={image.alt} loading="lazy" /></button>)}
+  <dialog><button class="dialog-close" type="button" aria-label="Close">×</button><img src="" alt="" /></dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+    const dialog = gallery.querySelector<HTMLDialogElement>('dialog')!;
+    const image = dialog.querySelector<HTMLImageElement>('img')!;
+    gallery.querySelectorAll<HTMLButtonElement>('[data-src]').forEach((button) => button.addEventListener('click', () => {
+      image.src = button.dataset.src!;
+      image.alt = button.dataset.alt!;
+      dialog.showModal();
+    }));
+    dialog.querySelector('button')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  });
+</script>

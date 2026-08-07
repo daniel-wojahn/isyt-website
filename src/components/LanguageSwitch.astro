@@ -1,0 +1,18 @@
+<div class="language-switch" aria-label="Language">
+  <button type="button" data-set-language="en" aria-pressed="true">English</button>
+  <button type="button" data-set-language="bo" aria-pressed="false" lang="bo">བོད་ཡིག</button>
+</div>
+
+<script>
+  const storageKey = 'isyt-language';
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-set-language]')];
+  const panels = [...document.querySelectorAll<HTMLElement>('[data-language]')];
+  const setLanguage = (language: string) => {
+    panels.forEach((panel) => panel.hidden = panel.dataset.language !== language);
+    buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.setLanguage === language)));
+    document.documentElement.lang = language === 'bo' ? 'bo' : 'en-GB';
+    sessionStorage.setItem(storageKey, language);
+  };
+  buttons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.setLanguage!)));
+  setLanguage(sessionStorage.getItem(storageKey) === 'bo' ? 'bo' : 'en');
+</script>

@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Gallery from '../components/Gallery.astro';
+import LanguageSwitch from '../components/LanguageSwitch.astro';
+import Tabs from '../components/Tabs.astro';
+import aboutBo from '../content/about-bo.html?raw';
+import statutesBoRaw from '../content/statutes-bo.html?raw';
+
+const images = [
+  { src: '/assets/2023/05/Young-Tibetologists-1977.png', alt: 'Young Tibetologists in 1977' },
+  { src: '/assets/2020/12/image_2023-05-05_104510251.png', alt: 'ISYT conference participants' },
+  { src: '/assets/2023/05/4thISYT.png', alt: 'Fourth ISYT conference participants' },
+  { src: '/assets/2023/05/group-outside.jpg', alt: 'ISYT conference group outside' },
+];
+
+const statutesEn = [
+  { label: '1. Objectives', content: `<p>The objectives of the ISYT shall be to develop the study of Tibetan culture in all its aspects and to provide a venue for scholarly exchange among early-career scholars and postgraduate students through international cooperation between academic institutions and individual scholars. The primary means of achieving these aims shall be the organization of an international conference that shall take place every two or three years.</p>` },
+  { label: '2. Organization', content: `<p>The ISYT shall consist of Members, a Board of Advisors, a Secretary General and a President. A Convener or Conveners shall be appointed to host each conference.</p>` },
+  { label: '3. Membership', content: `<p>Those who have presented a paper at an ISYT conference will be entitled to full membership. Full members have the right to vote on any resolution. Membership expires at the end of one's status as a ‘Young Tibetologist’—that is, one for whom no more than six years have passed since one's final degree or one's first academic appointment. Members of the IATS who also qualify as ‘Young Tibetologists’ also enjoy full ISYT membership. Full membership can also be granted by President's action, requested by the members in a vote.</p>` },
+  { label: '4. Board of Advisors', content: `<p><strong>Composition:</strong> Any ISYT member is eligible for membership on the Board of Advisors. Membership on the Board is restricted to nine, and there may be no more than two members from the same country, defined as either place of birth or place of residence.</p><p><strong>Duties:</strong> The Board of Advisors shall assist the President and the Convener(s) in all matters concerning the ISYT. The Board of Advisors shall elect the Secretary-General and make recommendations to the President for a Convener of the conference.</p><p><strong>Election:</strong> The Board of Advisors shall be elected by full members at the business meeting of the ISYT on the occasion of the conference and they shall hold office for the period covering two successive conferences. Should a Board member's status as a Young Tibetologist end during this term, a replacement shall be elected at the first conference following his/her election. If Board members fail to attend both the conference and the business meeting, and do not give the Secretary General a good reason for their absence, they shall be replaced in a by-election held at the business meeting from which they are absent.</p>` },
+  { label: '5. President', content: `<p><strong>Duties:</strong> It shall be the duty of the President to represent the ISYT and to oversee the implementation of the Statutes. The business meeting is to be chaired by the President. The President shall appoint the Convener of the conference recommended by the Board of Advisors to host the conference. If the President for any reason is unable to act, the Secretary General shall temporarily execute the duties of the President.</p><p><strong>Election:</strong> The President is elected to hold office for the period covering two successive conferences. Should a President's status as a Young Tibetologist end during this term, a replacement shall be elected at the first conference following his/her election. If the President fails to attend both the conference and the business meeting, he or she shall be replaced in a by-election held at the business meeting from which he or she is absent.</p><p>Members who have presented a paper at an ISYT conference shall be eligible to stand as President. Nominations must be seconded, and should be passed to the Convener(s) before the business meeting. The President shall be elected by full members of the ISYT in a secret ballot during the business meeting. The candidate who obtains a majority of the votes cast shall be declared elected. If no candidate obtains a simple majority, a second ballot will be held to decide between the two candidates who obtained most votes in the first ballot.</p>` },
+  { label: '6. Secretary General', content: `<p><strong>Duties:</strong> The Secretary General shall coordinate the work of the Board of Advisors. The permanent office of the ISYT shall be established at the institution to which the Secretary General is attached for the period of his time in office. Communications from this office should be released in both English and Tibetan.</p><p><strong>Election:</strong> The Board of Advisors shall elect the Secretary General from among their number. The Secretary General's term in office shall be the same as in the case of the Board of Advisors.</p>` },
+  { label: '7. Conferences', content: `<p><strong>Organization:</strong> The ISYT shall organize international conferences which shall take place every two or three years. The conferences held under the auspices of the ISYT shall be arranged by the Convener appointed by the Board of Advisors. The final programme of the Seminar should be determined by close consultation between the Convener and the President. There shall be no more than two parallel concurrently running panels.</p><p><strong>Convener:</strong> The President shall appoint the Convener recommended by the Board of Advisors to host the conference. The Convener shall have full responsibility for the practical organization of the conference and the publication of its proceedings.</p><p><strong>Participants:</strong> The conferences shall be open to all bona fide scholars with an established interest in Tibet. All participants must be no more than six years out of their final degree, or no more than six years shall have passed since their first academic appointment. All participants of the conference are expected to deliver a paper on the subject of their choice. The invitation of observers shall be at the discretion of the President and of the convener of the conference.</p><p><strong>Business meeting:</strong> A business meeting shall be held at each conference. A quorum shall be deemed to be present at a business meeting if at least fifteen full members as well as the President and/or the Secretary General are participating. The President and the Secretary General may authorize the Convener(s) to represent them.</p>` },
+  { label: '8. Affiliation with the IATS', content: `<p>In recognition of the close relationship between the ISYT and the IATS, Members of the ISYT shall endeavour to ensure a formal affiliation between the two research associations. This will take the form of an amendment to the statutes of the IATS granting IATS membership to ISYT members who have presented at two ISYT conferences. This will be proposed by ISYT members in attendance at the next business meeting of the IATS.</p>` },
+  { label: '9. Amendments and Dissolution', content: `<p><strong>Statutory Amendment:</strong> The statutes of the ISYT can only be ratified or changed by a two-third majority of the full members present at a conference business meeting. Amendments to the statutes can be adopted by a two-third majority of the full members present at a conference business meeting.</p><p><strong>Dissolution:</strong> The ISYT shall declare itself dissolved if two-thirds of the full members present at the business meeting of a conference should so vote, if the Board of Advisors unanimously declares it dissolved or if on two successive occasions it proves impossible to convene a conference.</p>` },
+];
+
+const statutesBoLabels = [
+  'དམིགས་ཡུལ།', 'ཚོགས་པ།', 'ཚོགས་མི།', 'སློབ་སྟོན་ལྷན་ཚོགས།', 'ཚོགས་གཙོ།',
+  'སྤྱི་ཁྱབ་དྲུང་ཆེ།', 'ཚོགས་ཆེན།', 'རྒྱལ་སྤྱིའི་བོད་རིག་པའི་ཚོགས་པ་དང་འབྲེལ་ཚུལ།', 'བསྒྱུར་བཅོས་དང་ཕྱིར་བསྡུ།',
+];
+const marker = (label: string) => `<p><strong>${label}</strong></p>`;
+const starts = statutesBoLabels.map((label) => statutesBoRaw.indexOf(marker(label)));
+if (starts.some((start) => start < 0)) throw new Error('The Tibetan statutes must contain all nine sections.');
+const firstTitleEnd = statutesBoRaw.indexOf('</p>') + 4;
+const statutesBoIntro = statutesBoRaw.slice(firstTitleEnd, starts[0]);
+const statutesBo = statutesBoLabels.map((label, index) => ({
+  label: `${index + 1}. ${label}`,
+  content: statutesBoRaw.slice(starts[index] + marker(label).length, starts[index + 1] ?? statutesBoRaw.length),
+}));
+---
+
+<BaseLayout title="About the ISYT" bodyClass="about-page">
+  <section class="page-heading content-width">
+    <p>Who we are</p>
+    <h1>About the ISYT</h1>
+    <LanguageSwitch />
+  </section>
+
+  <Gallery images={images} />
+
+  <section class="about-history dark-section">
+    <div data-language="en" class="content-width">
+      <article class="about-row">
+        <h2>Background</h2>
+        <div><p>In 1977, Martin Brauen and Per Kvaerne convened the Seminar of Young Tibetologists in Zürich. They invited sixty scholars, thirty of whom attended the five-day conference. Based on their success, another conference was planned, to take place in Oxford.</p><p>That conference, convened by Michael Aris and Aung San Suu Kyi, marked the formal beginning of the International Association for Tibetan Studies (IATS). Later, the Seminar of Young Tibetologists was retroactively awarded the status of being the first IATS seminar. The IATS seminars doubled at nearly every meeting, and, alongside the Csoma de Körös Symposium, became the premier conference in the field of Tibetan studies. With success came exponential growth, and by the time of the fourth seminar in Narita, it was impractical for participants to attend every paper, a state of affairs that is still bemoaned today.</p></div>
+      </article>
+      <article class="about-row">
+        <h2>Rebirth of the ISYT in 2006</h2>
+        <div><p>At the 11th meeting of the International Association for Tibetan Studies (IATS) in Germany in 2006, the idea was mooted of a separate, but related organisation with a specific focus on Tibetologists in the early stages of their careers. Perhaps the IATS had grown too large, making it difficult to attend all the presentations relevant to our research topics, or perhaps the beards had grown too luxuriant. Either way, a small group of renegades met and agreed to hold their own conference with a smaller number of panels, slightly longer presentations, and a more youthful approach.</p><p>One of our goals in reviving the Seminar of Young Tibetologists is therefore to return to the intimacy of our humble beginnings. Due to the growth of the field, it may not be possible to hold a conference without panels and time conflicts, but we still aim to provide an intimate setting for the sharing of ideas.</p><p>The first International Seminar of Young Tibetologists was convened in London at the School of Oriental and African Studies, 9–13 August 2007 by Tim Myatt and Brandon Dotson. Striking a balance between academic rigour and diligent attention to the pursuits and needs of youth (social gatherings), the conference was a great success.</p><p>Most importantly, ISYT adopted a set of statutes, elected a governing board, and a proposal to host the second ISYT conference in Paris was unanimously accepted.</p></div>
+      </article>
+      <article class="about-row">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details><summary>Who is a Young Tibetologist?</summary><p>Within minutes of announcing the planned creation of the International Seminar of Young Tibetologists, the joke about the exact nature of a ‘young Tibetologist’ had already grown old. If you are put off by the title, that's fine. So are we. But you may still have questions, such as...</p></details>
+          <details><summary>Am I young?</summary><p>We have no strict definition, only the following guidelines. You are young if:</p><ol><li>No more than 6 years have passed since your final degree; or</li><li>No more than 6 years have passed since your first academic appointment.</li></ol><p>If these guidelines exclude you, do not consider it a lost cause, but contact us.</p></details>
+          <details><summary>Am I a Tibetologist?</summary><p>We are trying to keep the conference's remit as broad as possible, so if you are engaged in work on the Tibetan cultural area, broadly conceived, the answer is yes. Further, we welcome participants with expertise in Himalayan anthropology, also broadly defined.</p></details>
+        </div>
+      </article>
+    </div>
+    <article data-language="bo" lang="bo" class="content-width translated-copy" hidden set:html={aboutBo} />
+  </section>
+
+  <section class="people content-width">
+    <div><h2>Darig Thokmay</h2><p>Current President</p><h2>Daniel Wojahn</h2><p>Secretary-General</p><p><strong>Previously:</strong><br />Natalia Mikhaylova (President)<br />Natasha Mikles (Secretary-General)<br />Kalsang Norbu Gurung (President)<br />Lewis Doney (Secretary-General)</p></div>
+    <div><h2>Board of Advisors</h2><p>Since 2024</p><p>Joie Szu-Chiao Chen (Taiwan)<br />Baatra Erdene-Ochir (Mongolia)<br />Drolma Choekyi Jusal (Austria)<br />Geshe Tri Yungdrung (Tibet)<br />Rachael Griffiths (France)<br />Tenzin Desal (India)<br />Sonam Wangmo (Tibet)<br />Tenzin Choephel (UK)</p></div>
+  </section>
+
+  <section class="statutes dark-section">
+    <div class="content-width">
+      <div data-language="en">
+        <h2>The Statutes of the ISYT</h2>
+        <p>At the first business meeting of the ISYT a set of statutes was adopted in order to take the organisation forward. A president, secretary general and a board of advisors was also elected. At the second meeting of the ISYT, the president and secretary general proposed a set of amendments that were voted on and subsequently adopted according to a majority consensus. The first conference of the Seminar of Young Tibetologists was held in Zürich in 1977. The Seminar was reinaugurated in London in 2007 as the International Seminar of Young Tibetologists (hereinafter ISYT).</p>
+        <p>The following statutes were passed during the business meeting held at London, 12th August, 2007 and revised at subsequent business meetings.</p>
+        <Tabs items={statutesEn} label="ISYT statutes" />
+      </div>
+      <div data-language="bo" lang="bo" hidden>
+        <h2>རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་ཚོགས་པའི་གཞུང་འབྲེལ་བཅའ་ཡིག</h2>
+        <div set:html={statutesBoIntro} />
+        <Tabs items={statutesBo} label="ཚོགས་པའི་བཅའ་ཡིག" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

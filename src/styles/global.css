@@ -78,11 +78,48 @@ p { margin: 0 0 1.25rem; }
 .footer-links { display: flex; justify-content: flex-end; gap: 22px; }
 .footer-links a, .back-to-top { color: var(--white); font-size: 13px; }
 .back-to-top { position: absolute; right: 20px; bottom: 10px; }
+.about-page { background: var(--gold); }
+.about-page main { padding-top: 150px; background: var(--white); }
+.page-heading { position: relative; padding: 45px 0 70px; }
+.page-heading > p { margin: 0; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; }
+.page-heading h1 { max-width: 850px; margin: 16px 0 0; font-size: clamp(54px, 6vw, 68px); letter-spacing: -2px; }
+.language-switch { position: absolute; right: 0; bottom: 72px; display: flex; border: 1px solid var(--black); }
+.language-switch button { border: 0; padding: 10px 16px 7px; color: var(--black); background: var(--white); font: inherit; cursor: pointer; }
+.language-switch button[aria-pressed="true"] { color: var(--white); background: var(--black); }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--black); }
+.gallery > button { border: 0; padding: 0; background: var(--black); cursor: zoom-in; }
+.gallery > button img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.gallery dialog { width: min(1100px, calc(100% - 40px)); border: 0; padding: 0; background: transparent; }
+.gallery dialog::backdrop { background: rgb(0 0 0 / 85%); }
+.gallery dialog img { max-height: 85vh; margin: auto; }
+.dialog-close { position: absolute; z-index: 1; top: 0; right: 0; border: 0; padding: 4px 14px; color: var(--white); background: var(--black); font-size: 30px; cursor: pointer; }
+.about-history { padding-block: 100px; }
+.about-row { display: grid; grid-template-columns: 1fr 2fr; gap: 70px; padding-block: 52px; border-bottom: 1px solid #555; }
+.about-row:first-child { padding-top: 0; }
+.about-row:last-child { padding-bottom: 0; border-bottom: 0; }
+.about-row h2 { font-size: clamp(32px, 4vw, 50px); }
+.faq-list details { border-bottom: 1px solid #555; padding: 15px 0; }
+.faq-list summary { color: var(--gold); cursor: pointer; }
+.translated-copy > p:has(strong) { margin-top: 56px; color: var(--gold); font-size: clamp(28px, 4vw, 46px); }
+.translated-copy > p:first-child { margin-top: 0; color: var(--white); font-size: clamp(40px, 6vw, 70px); }
+.people { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-block: 100px; }
+.people h2 { margin-bottom: 5px; font-size: 34px; }
+.people p { color: var(--gray); }
+.statutes { padding-block: 110px; }
+.statutes h2 { font-size: clamp(48px, 6vw, 78px); }
+.tabs { display: grid; grid-template-columns: minmax(240px, .7fr) 2fr; gap: 45px; margin-top: 55px; }
+.tab-list { display: flex; flex-direction: column; }
+.tab-list button { border: 0; border-bottom: 1px solid #555; padding: 17px 4px; color: var(--white); background: transparent; text-align: left; font: inherit; cursor: pointer; }
+.tab-list button[aria-selected="true"] { color: var(--gold); }
+.tab-panels { min-height: 350px; }
+.tab-panels p { text-align: justify; }
 
 @media (max-width: 900px) {
   .site-logo img { width: 280px; }
   .split-section, .explore { grid-template-columns: 1fr; }
   .explore { padding-block: 70px; }
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .about-row { grid-template-columns: 1fr; gap: 20px; }
 }
 
 @media (max-width: 640px) {
@@ -106,4 +143,13 @@ p { margin: 0 0 1.25rem; }
   .footer-inner { grid-template-columns: 1fr auto; }
   .footer-mark { display: none; }
   .footer-links { flex-direction: column; gap: 6px; }
+  .about-page main { padding-top: 95px; }
+  .page-heading { padding-block: 45px; }
+  .page-heading h1 { font-size: 58px; letter-spacing: -2px; }
+  .language-switch { position: static; width: fit-content; margin-top: 25px; }
+  .gallery { grid-template-columns: 1fr; }
+  .about-history, .people, .statutes { padding-block: 65px; }
+  .people, .tabs { grid-template-columns: 1fr; gap: 35px; }
+  .tab-list { display: grid; grid-template-columns: 1fr 1fr; }
+  .tab-list button { padding: 12px 6px; }
 }

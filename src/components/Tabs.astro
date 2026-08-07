@@ -1,0 +1,44 @@
+---
+interface Item { label: string; content: string }
+interface Props { items: Item[]; label: string }
+const { items, label } = Astro.props;
+const id = `tabs-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+---
+
+<div class="tabs" data-tabs>
+  <div class="tab-list" role="tablist" aria-label={label} aria-orientation="vertical">
+    {items.map((item, index) => (
+      <button id={`${id}-tab-${index}`} type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} aria-controls={`${id}-panel-${index}`} tabindex={index === 0 ? 0 : -1}>{item.label}</button>
+    ))}
+  </div>
+  <div class="tab-panels">
+    {items.map((item, index) => (
+      <section id={`${id}-panel-${index}`} role="tabpanel" aria-labelledby={`${id}-tab-${index}`} hidden={index !== 0} set:html={item.content} />
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((tabs) => {
+    const buttons = [...tabs.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...tabs.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+    const select = (index: number) => {
+      buttons.forEach((button, i) => {
+        button.setAttribute('aria-selected', String(i === index));
+        button.tabIndex = i === index ? 0 : -1;
+      });
+      panels.forEach((panel, i) => panel.hidden = i !== index);
+    };
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => select(index));
+      button.addEventListener('keydown', (event) => {
+        const key = event.key;
+        if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(key)) return;
+        event.preventDefault();
+        const next = key === 'Home' ? 0 : key === 'End' ? buttons.length - 1 : (index + (key === 'ArrowDown' ? 1 : -1) + buttons.length) % buttons.length;
+        select(next);
+        buttons[next].focus();
+      });
+    });
+  });
+</script>
