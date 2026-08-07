@@ -40,14 +40,14 @@ p { margin: 0 0 1.25rem; }
 .site-navigation { display: block; }
 .site-navigation ul { display: flex; gap: 28px; margin: 0; padding: 0; list-style: none; }
 .site-navigation a { color: var(--white); font: 400 14px/1 "Biryani", sans-serif; text-transform: uppercase; letter-spacing: 1px; }
-.inner-page .site-header:not(.menu-ready) .site-navigation a { color: var(--gold); }
+.inner-page .site-header:not(.menu-ready) .site-navigation a, .about-page .site-header:not(.menu-ready) .site-navigation a { color: var(--gold); }
 .site-header.menu-ready .site-navigation { position: absolute; top: 92px; right: 0; display: none; width: min(340px, 90vw); padding: 28px; background: var(--gold); }
 .site-header.menu-ready .site-navigation.is-open { display: block; }
 .site-header.menu-ready .site-navigation ul { flex-direction: column; gap: 18px; }
 .menu-toggle { display: none; gap: 10px; align-items: center; border: 0; color: var(--white); background: transparent; font: inherit; cursor: pointer; }
 .site-header.menu-ready .menu-toggle { display: flex; }
 .menu-toggle span:first-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.menu-toggle span:last-child { font-size: 34px; line-height: 1; }
+.menu-toggle span:last-child { display: block; width: 28px; height: 20px; background: linear-gradient(currentColor 0 0) top / 100% 3px no-repeat, linear-gradient(currentColor 0 0) center / 100% 3px no-repeat, linear-gradient(currentColor 0 0) bottom / 100% 3px no-repeat; }
 .hero { min-height: 684px; padding-top: 225px; color: var(--white); background: linear-gradient(90deg, rgba(0,0,0,.7), rgba(0,0,0,.08)), url("/assets/2023/05/header-1024x683-1.png") center/cover no-repeat; }
 .hero-copy { padding-inline: 40px; }
 .hero-copy .eyebrow { width: fit-content; margin: 0 0 20px 25px; padding: 10px 7px 5px; background: rgb(0 0 0 / 5%); font-size: 22px; text-transform: uppercase; text-shadow: 4px 7px 16px rgb(0 0 0 / 52%); }
@@ -122,7 +122,7 @@ p { margin: 0 0 1.25rem; }
 .tab-panels p { text-align: justify; }
 .inner-page main { min-height: 75vh; padding-top: 150px; background: var(--white); }
 .inner-page .site-header { color: var(--gold); }
-.inner-page .menu-toggle { color: var(--gold); }
+.inner-page .menu-toggle, .about-page .menu-toggle { color: var(--gold); }
 .listing-heading { padding: 60px 0 75px; }
 .listing-heading > p, .report-title > p, .proceeding-detail .eyebrow { margin: 0 0 16px; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; }
 .listing-heading h1, .report-title h1 { max-width: 900px; margin: 0; font-size: clamp(54px, 7vw, 92px); letter-spacing: -3px; }
@@ -197,7 +197,7 @@ p { margin: 0 0 1.25rem; }
   .footer-links { flex-direction: column; gap: 6px; }
   .about-page main { padding-top: 95px; }
   .page-heading { padding-block: 45px; }
-  .page-heading h1 { font-size: 58px; letter-spacing: -2px; }
+  .page-heading h1 { font-size: 48px; letter-spacing: -2px; }
   .language-switch { position: static; width: fit-content; margin-top: 25px; }
   .gallery { grid-template-columns: 1fr; }
   .about-history, .people, .statutes { padding-block: 65px; }

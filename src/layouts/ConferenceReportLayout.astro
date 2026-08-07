@@ -3,7 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Gallery from '../components/Gallery.astro';
 interface Props {
   listTitle: string; title: string; conveners: string[]; sponsorship: string; city: string; year: string; cover: string; body: string;
-  images: { src: string; alt: string }[]; sponsorImages?: string[]; downloads?: { label: string; href: string }[];
+  images: { src: string; alt: string }[]; sponsorImages?: { src: string; alt: string }[]; downloads?: { label: string; href: string }[];
   previous?: { slug: string; listTitle: string }; next?: { slug: string; listTitle: string };
 }
 const { listTitle, title, conveners, sponsorship, city, year, cover, body, images, sponsorImages = [], downloads = [], previous, next } = Astro.props;
@@ -15,7 +15,7 @@ const { listTitle, title, conveners, sponsorship, city, year, cover, body, image
     <div class="report-meta">
       <div><h2>{conveners.length > 1 ? 'Conveners' : 'Convener'}</h2><p>{conveners.map((name) => <>{name}<br /></>)}</p></div>
       <div><h2>City</h2><p>{city}</p><h2>Year</h2><p>{year}</p></div>
-      <div class="sponsors"><h2>Sponsorship</h2><p>{sponsorship}</p>{sponsorImages.map((src) => <img src={src} alt="Sponsor" />)}</div>
+      <div class="sponsors"><h2>Sponsorship</h2><p>{sponsorship}</p>{sponsorImages.map((image) => <img src={image.src} alt={image.alt} />)}</div>
       {downloads.length > 0 && <div class="action-links">{downloads.map((link) => <a href={link.href}>{link.label}</a>)}</div>}
     </div>
   </section>
