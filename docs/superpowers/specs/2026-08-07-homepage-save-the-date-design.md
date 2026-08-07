@@ -28,7 +28,7 @@ Replace the outdated homepage notice with the complete bilingual announcement fo
 ## Responsive and accessibility behavior
 
 - Keep semantic headings, paragraphs, articles, links, and language attributes.
-- Maintain white-on-gold contrast and visible hover/focus states.
+- Maintain accessible black-on-gold contrast and visible hover/focus states.
 - Stack the announcement columns without horizontal overflow on narrow screens.
 - Preserve the existing accessible JotForm fields and endpoint unchanged.
 

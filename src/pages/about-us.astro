@@ -72,21 +72,32 @@ const statutesBo = statutesBoLabels.map((label, index) => ({
   </section>
 
   <section class="people content-width">
-    <div><h2>Darig Thokmay</h2><p>Current President</p><h2>Daniel Wojahn</h2><p>Secretary-General</p><p><strong>Previously:</strong><br />Natalia Mikhaylova (President)<br />Natasha Mikles (Secretary-General)<br />Kalsang Norbu Gurung (President)<br />Lewis Doney (Secretary-General)</p></div>
-    <div><h2>Board of Advisors</h2><p>Since 2024</p><p>Joie Szu-Chiao Chen (Taiwan)<br />Baatra Erdene-Ochir (Mongolia)<br />Drolma Choekyi Jusal (Austria)<br />Geshe Tri Yungdrung (Tibet)<br />Rachael Griffiths (France)<br />Tenzin Desal (India)<br />Sonam Wangmo (Tibet)<br />Tenzin Choephel (UK)</p></div>
+    <div class="people-column">
+      <div class="person"><h2>Darig Thokmay</h2><p class="role">Current President</p></div>
+      <div class="person"><h2>Daniel Wojahn</h2><p class="role">Secretary-General</p></div>
+      <p class="people-history"><strong>Previously:</strong><br />Natalia Mikhaylova (President)<br />Natasha Mikles (Secretary-General)<br /><br />Kalsang Norbu Gurung (President)<br />Lewis Doney (Secretary-General)</p>
+    </div>
+    <div class="people-column">
+      <div class="person"><h2>Board of Advisors</h2><p class="role">Since 2024</p></div>
+      <p>Joie Szu-Chiao Chen (Taiwan)<br />Baatra Erdene-Ochir (Mongolia)<br />Drolma Choekyi Jusal (Austria)<br />Geshe Tri Yungdrung (Tibet)<br />Rachael Griffiths (France)<br />Tenzin Desal (India)<br />Sonam Wangmo (Tibet)<br />Tenzin Choephel (UK)</p>
+    </div>
   </section>
 
   <section class="statutes dark-section">
     <div class="content-width">
       <div data-language="en">
-        <h2>The Statutes of the ISYT</h2>
-        <p>At the first business meeting of the ISYT a set of statutes was adopted in order to take the organisation forward. A president, secretary general and a board of advisors was also elected. At the second meeting of the ISYT, the president and secretary general proposed a set of amendments that were voted on and subsequently adopted according to a majority consensus. The first conference of the Seminar of Young Tibetologists was held in Zürich in 1977. The Seminar was reinaugurated in London in 2007 as the International Seminar of Young Tibetologists (hereinafter ISYT).</p>
-        <p>The following statutes were passed during the business meeting held at London, 12th August, 2007 and revised at subsequent business meetings.</p>
+        <div class="statutes-intro">
+          <h2>The Statutes of the ISYT</h2>
+          <p>At the first business meeting of the ISYT a set of statutes was adopted in order to take the organisation forward. A president, secretary general and a board of advisors was also elected. At the second meeting of the ISYT, the president and secretary general proposed a set of amendments that were voted on and subsequently adopted according to a majority consensus. The first conference of the Seminar of Young Tibetologists was held in Zürich in 1977. The Seminar was reinaugurated in London in 2007 as the International Seminar of Young Tibetologists (hereinafter ISYT).</p>
+          <p>The following statutes were passed during the business meeting held at London, 12th August, 2007 and revised at subsequent business meetings.</p>
+        </div>
         <Tabs items={statutesEn} label="ISYT statutes" />
       </div>
       <div data-language="bo" lang="bo" hidden>
-        <h2>རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་ཚོགས་པའི་གཞུང་འབྲེལ་བཅའ་ཡིག</h2>
-        <div set:html={statutesBoIntro} />
+        <div class="statutes-intro">
+          <h2>རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་ཚོགས་པའི་གཞུང་འབྲེལ་བཅའ་ཡིག</h2>
+          <div set:html={statutesBoIntro} />
+        </div>
         <Tabs items={statutesBo} label="ཚོགས་པའི་བཅའ་ཡིག" />
       </div>
     </div>

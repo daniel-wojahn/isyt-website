@@ -55,6 +55,12 @@ for (const [route, html] of pages) {
   const attributes = [...html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g)].map((match) => match[1]);
   const sourceSets = [...html.matchAll(/\bsrcset=["']([^"']+)["']/g)].flatMap((match) => match[1].split(',').map((item) => item.trim().split(/\s+/, 1)[0]));
   await checkReferences([...attributes, ...sourceSets], route);
+  assert.equal((html.match(/class="menu-bar"/g) ?? []).length, 3, `${route} must render one three-bar menu icon`);
+  assert(!html.includes('☰'), `${route} contains the duplicate hamburger glyph`);
+}
+
+for (const route of ['/proceedings/', '/previous-seminars/']) {
+  if (pages.has(route)) assert.match(pages.get(route), /class="listing-overlay"/, `${route} has no hover overlay`);
 }
 
 if (pages.has('/')) {
@@ -65,6 +71,18 @@ if (pages.has('/')) {
   assert.match(home, /name="q6_name"/);
   assert.match(home, /name="q4_email"/);
   assert.match(home, /name="q5_message"/);
+  assert.match(home, /19–23 July 2027/);
+  assert.match(home, /Korea University · Seoul, South Korea/);
+  assert.match(home, /isyt2027koreauniversity@gmail\.com/);
+  assert.ok((home.match(/href="mailto:isyt2027koreauniversity@gmail\.com"/g) ?? []).length >= 3);
+  assert.match(home, /href="\/about-us\/">our website<\/a>/);
+  assert.match(home, /Seongmin, Anju, Seungjong, Shawo and Youjung/);
+  assert.match(home, /རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་གྲོས་ཚོགས་ཐེངས་བརྒྱད་པ།/);
+  assert.match(home, /class="announcement-languages"/);
+  assert(!home.includes('23–27 August 2027'));
+  assert(!home.includes('isyt2024@wolfson.ox.ac.uk'));
+  assert(!home.includes('Document.pdf'));
+  assert.match(home, /data-copyright-year/);
 }
 
 if (pages.has('/about-us/')) {
@@ -73,6 +91,10 @@ if (pages.has('/about-us/')) {
   assert.match(about, /data-language="bo"/);
   assert.match(about, /རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་ཚོགས་པའི་སྐོར།/);
   assert.match(about, /རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་ཚོགས་པའི་གཞུང་འབྲེལ་བཅའ་ཡིག/);
+  assert.match(about, /class="gallery" data-gallery/, 'About gallery was removed');
+  assert.equal((about.match(/class="people-column"/g) ?? []).length, 2);
+  assert.match(about, /class="role"/);
+  assert.match(about, /class="statutes-intro"/);
 }
 
 if (pages.has('/5th-isyt-conference-report/')) {
@@ -100,10 +122,26 @@ async function filesUnder(directory) {
   return nested.flat();
 }
 
-for (const file of await filesUnder(dist)) {
+const builtFiles = await filesUnder(dist);
+const css = (await Promise.all(
+  builtFiles.filter((file) => extname(file) === '.css').map((file) => readFile(file, 'utf8')),
+)).join('\n');
+assert.match(css, /prefers-reduced-motion:\s*reduce/);
+assert.match(css, /\.listing-page \.menu-toggle/);
+assert.match(css, /\.listing-card:is\(:hover,\s*:focus-visible\) \.listing-overlay/);
+assert.match(css, /\.about-history a/);
+assert.match(css, /\.about-history \.faq-list summary/);
+assert.match(css, /\.statutes \.tab-list button:is\([^}]*aria-selected=["']?true["']?/);
+assert.match(css, /--link:#76501c/);
+assert.match(css, /\.announcement\{color:var\(--black\)/);
+assert.match(css, /:focus-visible\{outline:3px solid var\(--black\)/);
+assert.match(css, /\.faq-page \.tab-list button\[aria-selected=true\]\{color:var\(--white\);background:var\(--black\)/);
+
+for (const file of builtFiles) {
   if (!['.html', '.css', '.js'].includes(extname(file))) continue;
   const contents = await readFile(file, 'utf8');
   assert(!/wp-content|wp-includes|elementor/i.test(contents), `${file} contains a legacy reference`);
+  assert(!contents.includes('Document.pdf'), `${file} exposes the source announcement PDF`);
   if (extname(file) === '.css') {
     const urls = [...contents.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)].map((match) => match[1]);
     await checkReferences(urls, file);
@@ -115,5 +153,10 @@ for (const download of [
   'ISYT2024--poster_template.pptx', 'LMH-instructions.pdf', 'Presentation_Q&A.pdf',
   'archive/ISYT-Paris-Programme-2009.pdf',
 ]) await access(join(dist, download));
+
+await access(join(dist, 'Document.pdf')).then(
+  () => assert.fail('Document.pdf must not be published'),
+  () => {},
+);
 
 console.log(`Verified ${routes.length} route(s).`);

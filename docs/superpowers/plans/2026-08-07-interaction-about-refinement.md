@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - Keep the four-image About gallery and the supplied English/Tibetan content.
-- Keep gold `#ce933a`, link brown `#b98535`, black, white, and gray as the palette.
+- Keep gold `#ce933a`, accessible link brown `#76501c`, black, white, and gray as the palette.
 - Do not import WordPress or Elementor CSS/JavaScript.
 - Do not add an animation library or runtime dependency.
 - Preserve all routes, downloads, JotForm fields, and no-JavaScript fallbacks.
@@ -103,11 +103,11 @@ Replace the current glyph/background rules in `src/styles/global.css` with three
 .menu-bar:first-child { width: 25px; }
 .menu-bar:last-child { width: 30px; }
 .menu-toggle:hover .menu-bar { width: 30px; }
-.site-header.is-open .menu-bar:first-child { width: 20px; transform: rotate(45deg) translate(5px, 2px); }
-.site-header.is-open .menu-bar:nth-child(2) { transform: translateX(-11px); }
-.site-header.is-open .menu-bar:last-child { width: 20px; transform: rotate(-45deg) translate(5px, -2px); }
-.listing-page .menu-toggle { color: var(--white); }
-.listing-page .site-header:not(.menu-ready) .site-navigation a { color: var(--white); }
+.site-header.is-open .menu-bar:first-child { width: 30px; transform: translateY(9px) rotate(45deg); }
+.site-header.is-open .menu-bar:nth-child(2) { opacity: 0; }
+.site-header.is-open .menu-bar:last-child { width: 30px; transform: translateY(-9px) rotate(-45deg); }
+.listing-page .menu-toggle { color: var(--black); }
+.listing-page .site-header:not(.menu-ready) .site-navigation a { color: var(--black); }
 ```
 
 - [ ] **Step 4: Add the original listing overlays**
@@ -143,8 +143,8 @@ Add focused native transitions without animating layout:
 a, button { transition: color .3s, background-color .3s, opacity .3s; }
 .gallery > button img { transition: opacity .3s linear; }
 .gallery > button:hover img { opacity: .8; }
-.feature-links a:hover h2 { color: var(--gold); }
-.action-links a:hover, .contact-grid button:hover { color: var(--black); background: var(--white); }
+.feature-links a:is(:hover, :focus-visible) h2 { color: var(--black); transform: translateX(8px); }
+.action-links a:is(:hover, :focus-visible), .contact-grid button:is(:hover, :focus-visible) { color: var(--black); background: var(--white); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
@@ -236,16 +236,16 @@ Wrap each statutes language heading and introduction in `.statutes-intro`, leavi
 Replace the affected About rules in `src/styles/global.css` with:
 
 ```css
-.about-history { padding-block: 100px; color: var(--white); background: var(--gold); }
-.about-row { grid-template-columns: 30% 70%; gap: 0; padding-block: 32px; border-bottom: 1px solid rgb(255 255 255 / 45%); }
+.about-history { padding-block: 100px; color: var(--black); background: var(--gold); }
+.about-row { grid-template-columns: 30% 70%; gap: 0; padding-block: 32px; border-bottom: 1px solid rgb(0 0 0 / 55%); }
 .about-row h2 { padding-right: 60px; }
 .about-row > div { padding-left: 10px; }
-.about-history a, .about-history .faq-list summary { color: var(--white); }
+.about-history a, .about-history .faq-list summary { color: var(--black); }
 .about-history a { text-decoration: underline; text-underline-offset: 3px; }
-.about-history a:hover, .about-history .faq-list summary:hover { color: var(--black); }
-.faq-list details { border-color: rgb(255 255 255 / 45%); }
+.about-history a:is(:hover, :focus-visible), .about-history .faq-list summary:is(:hover, :focus-visible) { color: var(--black); background: var(--white); }
+.faq-list details { border-color: rgb(0 0 0 / 55%); }
 .faq-list summary { font-weight: 700; }
-.translated-copy > p:has(strong), .translated-copy > p:first-child { color: var(--white); }
+.translated-copy > p:has(strong), .translated-copy > p:first-child { color: var(--black); }
 .people { grid-template-columns: 1fr 1fr; gap: 0; padding-block: 85px; text-align: center; }
 .people-column { min-height: 390px; padding: 0 70px; }
 .people-column + .people-column { border-left: 4px solid #dcdcdc; }
@@ -253,21 +253,21 @@ Replace the affected About rules in `src/styles/global.css` with:
 .people h2 { margin-bottom: 4px; font-size: 25px; }
 .people .role { color: var(--black); font-size: 12px; text-transform: uppercase; letter-spacing: 4px; }
 .people-history { color: var(--black); }
-.statutes { padding-block: 75px; color: var(--white); background: var(--gold); }
+.statutes { padding-block: 75px; color: var(--black); background: var(--gold); }
 .statutes-intro { width: min(100%, 950px); margin-inline: auto; }
 .statutes h2 { text-align: center; }
-.statutes .tabs { border: 1px solid rgb(255 255 255 / 55%); gap: 0; }
-.statutes .tab-list { border-right: 1px solid rgb(255 255 255 / 55%); }
-.statutes .tab-list button { border-color: transparent; padding-inline: 20px; }
-.statutes .tab-list button:is(:hover, [aria-selected="true"]) { color: var(--white); background: rgb(255 255 255 / 9%); }
+.statutes .tabs { border: 1px solid var(--black); gap: 0; }
+.statutes .tab-list { border-right: 1px solid var(--black); }
+.statutes .tab-list button { border-color: transparent; padding-inline: 20px; color: var(--black); }
+.statutes .tab-list button:is(:hover, :focus-visible, [aria-selected="true"]) { color: var(--white); background: var(--black); }
 .statutes .tab-panels { padding: 24px; }
 ```
 
 Add gold-section contrast for the home announcement as well:
 
 ```css
-.announcement a { color: var(--white); text-decoration: underline; }
-.announcement a:hover { color: var(--black); }
+.announcement a { color: var(--black); font-weight: 700; text-decoration: underline; }
+.announcement a:is(:hover, :focus-visible) { color: var(--black); background: var(--white); }
 ```
 
 In the mobile media query, stack and remove dividing borders:
@@ -342,7 +342,7 @@ Set the footer year from `new Date().getFullYear()` at build time and update it 
 
 - [ ] **Step 4: Add minimal responsive styles**
 
-Use the existing gold section and typography. Create a two-column `.announcement-languages` grid, a constrained centered heading, a subtle column divider, white underlined links, and a one-column mobile fallback.
+Use the existing gold section and typography. Create a two-column `.announcement-languages` grid, a constrained centered heading, a subtle column divider, accessible black underlined links, and a one-column mobile fallback.
 
 - [ ] **Step 5: Run the checker and commit Task 3**
 
@@ -370,14 +370,14 @@ git diff --check
 git status --short
 ```
 
-Expected: 18 routes verified, no whitespace errors, and only the user's pre-existing `package.json` change remains uncommitted.
+Expected: 18 routes verified, no whitespace errors, and only the user's pre-existing `package.json` change and source `Document.pdf` remain uncommitted.
 
 - [ ] **Step 2: Browser-check representative pages**
 
 At desktop and mobile widths, check:
 
 - `/about-us/`: gallery retained; all gold-section copy, FAQ summaries, links, and tab states visible; leadership centered; English/Tibetan switch works.
-- `/proceedings/` and `/previous-seminars/`: white three-bar hamburger visible on gold; menu opens once; cards reveal title overlays on hover/focus.
+- `/proceedings/` and `/previous-seminars/`: black three-bar hamburger visible on gold; menu opens once; cards reveal title overlays on hover/focus.
 - `/`: feature links, announcement links, gallery images, buttons, and footer links transition without losing contrast.
 
 Open/close the menu with keyboard and pointer and verify the three bars become one close mark without a duplicate glyph.

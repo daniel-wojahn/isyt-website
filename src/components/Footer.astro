@@ -1,14 +1,24 @@
+---
+const copyrightYear = new Date().getFullYear();
+---
+
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-copy">
-      <p>© 2023 ISYT. All rights reserved.</p>
+      <p>© <span data-copyright-year>{copyrightYear}</span> ISYT. All rights reserved.</p>
       <p>Webdesign by Daniel Wojahn</p>
     </div>
     <img class="footer-mark" src="/assets/2020/12/lion.png" alt="" />
     <div class="footer-links">
       <a href="https://www.facebook.com/groups/442632282453874" target="_blank" rel="noreferrer">Facebook</a>
-      <a href="mailto:isyt2024@wolfson.ox.ac.uk">Email</a>
+      <a href="mailto:isyt2027koreauniversity@gmail.com">Email</a>
     </div>
   </div>
   <a class="back-to-top" href="#top">Back to top ↑</a>
 </footer>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-copyright-year]').forEach((year) => {
+    year.textContent = String(new Date().getFullYear());
+  });
+</script>
