@@ -82,7 +82,7 @@ if (pages.has('/')) {
   assert(!home.includes('གྲོས་ཚོགས་འདིའི་ལོ་རྒྱུས་སོགས'));
   assert.match(home, /Seongmin, Anju, Seungjong, Shawo and Youjung/);
   assert.match(home, /class="announcement-languages"/);
-  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Save the date<\/p><h2>8th International Seminar of Young Tibetologists<\/h2><p class="announcement-details"><strong>19–23 July 2027<\/strong><br>Korea University · Seoul, South Korea<\/p><\/header>/);
+  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Save the date<\/p><h2>8th ISYT<\/h2><p class="announcement-details"><strong>19–23 July 2027<\/strong><br>Korea University · Seoul, South Korea<\/p><\/header>/);
   const hero = home.match(/<section class="hero">(.*?)<\/section>/s)?.[1] ?? '';
   assert(!hero.includes('19–23 July 2027'));
   assert(!hero.includes('Korea University'));
@@ -152,6 +152,7 @@ assert.match(css, /--link:#76501c/);
 assert.match(css, /\.announcement\{color:var\(--black\)/);
 assert.match(css, /:focus-visible\{outline:3px solid var\(--black\)/);
 assert.match(css, /\.faq-page \.tab-list button\[aria-selected=true\]\{color:var\(--white\);background:var\(--black\)/);
+assert.match(css, /\.announcement-details\{font-size:20px/);
 
 for (const file of builtFiles) {
   if (!['.html', '.css', '.js'].includes(extname(file))) continue;

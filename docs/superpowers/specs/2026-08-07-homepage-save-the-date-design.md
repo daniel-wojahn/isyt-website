@@ -13,7 +13,7 @@ Replace the outdated homepage notice with the complete bilingual announcement fo
 
 - Present the full English and user-supplied Tibetan announcements together in the existing gold section.
 - Use two parallel columns at desktop widths and stack English before Tibetan on mobile.
-- Keep one large “8th International Seminar of Young Tibetologists” section heading and omit duplicate English/Tibetan column titles.
+- Keep one large “8th ISYT” section heading and omit duplicate English/Tibetan column titles.
 - Show the bold date `19–23 July 2027` and `Korea University · Seoul, South Korea` in the Save the Date header.
 - Link the contact address to `mailto:isyt2027koreauniversity@gmail.com`; do not include a conference-history or website paragraph.
 - Use the English convenor list exactly as approved: `Seongmin, Anju, Seungjong, Shawo and Youjung`.
