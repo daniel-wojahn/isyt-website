@@ -74,7 +74,6 @@ p { margin: 0 0 1.25rem; }
 .announcement-language { padding-inline: 55px; font-size: 15px; }
 .announcement-language:first-child { padding-left: 0; border-right: 1px solid rgb(255 255 255 / 45%); }
 .announcement-language:last-child { padding-right: 0; }
-.announcement-language h3 { margin-bottom: 35px; font-size: clamp(26px, 3vw, 38px); }
 .announcement-signature { margin-top: 36px; }
 .announcement a { color: var(--black); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .announcement a:is(:hover, :focus-visible) { color: var(--black); background: var(--white); }

@@ -73,6 +73,7 @@ if (pages.has('/')) {
   assert.match(home, /name="q5_message"/);
   assert.match(home, /19–23 July 2027/);
   assert.match(home, /Korea University · Seoul, South Korea/);
+  assert.match(home, /Welcome to the 8th Seminar · Korea 2027/);
   assert.match(home, /isyt2027koreauniversity@gmail\.com/);
   assert.ok((home.match(/href="mailto:isyt2027koreauniversity@gmail\.com"/g) ?? []).length >= 3);
   assert.match(home, /We are delighted to announce/);
@@ -80,7 +81,6 @@ if (pages.has('/')) {
   assert(!home.includes('For more information on the conference and its history'));
   assert(!home.includes('གྲོས་ཚོགས་འདིའི་ལོ་རྒྱུས་སོགས'));
   assert.match(home, /Seongmin, Anju, Seungjong, Shawo and Youjung/);
-  assert.match(home, /རྒྱལ་སྤྱིའི་གཞོན་ནུ་བོད་རིག་པའི་གྲོས་ཚོགས་ཐེངས་བརྒྱད་པ།/);
   assert.match(home, /class="announcement-languages"/);
   assert(!home.includes('23–27 August 2027'));
   assert(!home.includes('isyt2024@wolfson.ox.ac.uk'));
@@ -89,6 +89,7 @@ if (pages.has('/')) {
 
   const announcementArticles = [...home.matchAll(/<article class="announcement-language"[^>]*>(.*?)<\/article>/gs)].map((match) => match[1]);
   assert.equal(announcementArticles.length, 2);
+  assert(announcementArticles.every((article) => !article.includes('<h3>')));
   assert.deepEqual(announcementArticles.map((article) => (article.match(/<p(?:\s[^>]*)?>/g) ?? []).length), [7, 7]);
   const tibetanText = announcementArticles[1].replace(/<[^>]+>/g, '');
   assert.equal(tibetanText, tibetanText.normalize('NFC'));
