@@ -104,8 +104,8 @@ main [lang="bo"] a[href^="mailto:"] {  color: var(--black);}
 .announcement summary { font-weight: 700; cursor: pointer; }
 .announcement details > *:not(summary) { margin-top: 16px; }
 .announcement .action-links { margin: 20px 0; }
-.announcement .action-links a { background: var(--black); color: var(--white); text-decoration: none; }
-.announcement .action-links a:is(:hover, :focus-visible) { color: var(--black); background: var(--white); }
+.announcement .action-links a { border: 2px solid var(--black); background: transparent; color: var(--black); text-decoration: none; }
+.announcement .action-links a:is(:hover, :focus-visible) { color: var(--white); background: var(--black); }
 [lang="bo"] { font-family: "Qomolangma Uchen Sarchen", "Noto Serif Tibetan", "Microsoft Himalaya", serif; line-height: 1.9; }
 .explore { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; padding-block: 110px; }
 .feature-links a { display: block; padding-block: 22px; border-bottom: 1px solid #d8d8d8; color: var(--black); }
