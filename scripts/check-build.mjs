@@ -77,13 +77,14 @@ if (pages.has('/')) {
   assert.match(home, /<p class="eyebrow">Welcome to the<\/p><h1>International Seminar of<br>Young Tibetologists<\/h1>/);
   assert.match(home, /isyt2027koreauniversity@gmail\.com/);
   assert.ok((home.match(/href="mailto:isyt2027koreauniversity@gmail\.com"/g) ?? []).length >= 3);
-  assert.match(home, /We are delighted to announce/);
-  assert.match(home, /filmmakers, artists, booksellers/);
+  assert.match(home, /invite you to submit your abstract/);
+  assert.match(home, /November 1st, 2026/);
+  assert.match(home, /href="\/assets\/conferences\/8th\/call-for-papers\.pdf" download/);
   assert(!home.includes('For more information on the conference and its history'));
   assert(!home.includes('གྲོས་ཚོགས་འདིའི་ལོ་རྒྱུས་སོགས'));
   assert.match(home, /Seongmin, Anju, Seungjong, Shawo and Youjung/);
   assert.match(home, /class="announcement-languages"/);
-  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Save the date<\/p><h2>8th International Seminar of Young Tibetologists<\/h2><p class="announcement-date">19–23 July 2027<\/p><p class="announcement-venue">Korea University · Seoul, South Korea<\/p><\/header>/);
+  assert.match(home, /<header class="announcement-heading"><p class="eyebrow">Call for papers<\/p><h2>8th International Seminar of Young Tibetologists<\/h2><p class="announcement-date">19–23 July 2027<\/p><p class="announcement-venue">Korea University · Seoul, South Korea<\/p><\/header>/);
   const hero = home.match(/<section class="hero">(.*?)<\/section>/s)?.[1] ?? '';
   assert(!hero.includes('19–23 July 2027'));
   assert(!hero.includes('Korea University'));
@@ -95,7 +96,7 @@ if (pages.has('/')) {
   const announcementArticles = [...home.matchAll(/<article class="announcement-language"[^>]*>(.*?)<\/article>/gs)].map((match) => match[1]);
   assert.equal(announcementArticles.length, 2);
   assert(announcementArticles.every((article) => !article.includes('<h3>')));
-  assert.deepEqual(announcementArticles.map((article) => (article.match(/<p(?:\s[^>]*)?>/g) ?? []).length), [7, 7]);
+  assert.deepEqual(announcementArticles.map((article) => (article.match(/<p(?:\s[^>]*)?>/g) ?? []).length), [12, 12]);
   const tibetanText = announcementArticles[1].replace(/<[^>]+>/g, '');
   assert.equal(tibetanText, tibetanText.normalize('NFC'));
   assert(!tibetanText.includes('\uFFFD'));
@@ -172,6 +173,7 @@ for (const file of builtFiles) {
 for (const download of [
   'Book-of-Abstracts_FINAL.pdf', 'ISYT2024--poster_template.pptx',
   'archive/ISYT-Paris-Programme-2009.pdf',
+  'assets/conferences/8th/call-for-papers.pdf',
 ]) await access(join(dist, download));
 
 await access(join(dist, 'Document.pdf')).then(
